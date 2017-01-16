@@ -8,14 +8,13 @@ Stable Tag: 1.0.0
 License: GPLv3 or later  
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
-A Slack utility for WordPress
+A Slack utility for WordPress.
 
 ## Description
 
-This plugin will provide
+This plugin integrates [Slack](https://slack.com) and WordPress.
 
 ## Install
-
 
 ### From Plugin Repository
 
@@ -23,24 +22,21 @@ Click install and activate it.
 
 ### From Github
 
-Composer and NPM are required.
-
-```
-# Go to your wp-content/plugins and run git
-cd wp-content/plugins
-git clone https://github.com/hametuha/hamail.git hamail
-# Then move into
-cd hamail
-# Install dependencies
-composer install
-npm install && npm start
-```
+Download from release.
 
 ### Enter API Key
 
-You need [SendGrid API Key](https://sendgrid.com/docs/Classroom/Send/How_Emails_Are_Sent/api_keys.html).
+You need [Slack Payload URL](https://api.slack.com/incoming-webhooks).
 
-For more details, go to hamail setting screen.
+For more details, go to our [support site](https://gianism.info/add-on/hameslack/).
+
+### Do something
+
+This plugin does nothing by default. You can post to slack anytime you want.
+
+```
+do_action( 'hameslack', $content );
+```
 
 ## Changelog
 
