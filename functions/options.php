@@ -32,6 +32,36 @@ function hameslack_payload_url( $raw = false ) {
 }
 
 /**
+ * Whether to use outgoing webhook
+ *
+ * @param bool $raw
+ *
+ * @return bool
+ */
+function hameslack_use_outgoing( $raw = false ) {
+	$option = get_option( 'hameslack_outgoing', false );
+	if ( $raw ) {
+		return $option;
+	}
+	if ( defined( 'SLACK_USE_OUTGOING' ) ) {
+		$option = (bool) SLACK_USE_OUTGOING;
+	}
+
+	/**
+	 * hameslack_use_outgoing
+	 *
+	 * Whether to use outgoing webhook
+	 *
+	 * @package hameslack
+	 * @since 1.0.0
+	 * @filter hameslack_use_outgoing
+	 * @param bool $use
+	 * @return bool
+	 */
+	return apply_filters( 'hameslack_use_outgoing', $option );
+}
+
+/**
  * Get default channel.
  *
  * @package hameslack

@@ -62,10 +62,26 @@ add_action( 'admin_menu', function () {
 							<?php endif; ?>
                             <p class="description">
 								<?php printf( __( 'You can get payload URL for Webhooks <a href="%s" target="_blank">here</a>.', 'hameslack' ), 'https://api.slack.com/incoming-webhooks' ); ?>
-								<?php ?>
                             </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="slack_outgoing"><?php _e( 'Outgoing Webhook', 'hameslack' ) ?></label>
+                        </th>
+                        <td>
+                            <label>
+                                <input type="checkbox" value="1" name="slack_outgoing"
+                                       id="slack_outgoing" <?php checked( hameslack_use_outgoing( true ) ) ?> />
+								<?php _e( 'Use outgoing web hook', 'hameslack' ) ?>
+                            </label>
+							<?php if ( defined( 'SLACK_USE_OUTGOING' ) ) : ?>
+                                <p>
+									<?php printf( __( 'You defined constant <strong>SLACK_USE_OUTGOING</strong>, so always %s.', 'hameslack' ), SLACK_USE_OUTGOING ? 'ON' : 'OFF' ); ?>
+                                </p>
+							<?php endif; ?>
                             <p class="description">
-
+								<?php printf( __( 'If you enable this, <a href="%s" target="_blank">outgoing webhook</a> is enabled.', 'hameslack' ), 'https://api.slack.com/outgoing-webhooks' ); ?>
                             </p>
                         </td>
                     </tr>
@@ -88,7 +104,7 @@ add_action( 'admin_menu', function () {
                             <textarea name="slack_test_text" id="slack_test_text"
                                       style="width: 100%; box-sizing: border-box;" rows="3"></textarea>
                             <p class="description">
-                                <?php printf( __( 'Message will be sent to Slack <code>%s</code>. Try and check it.', 'hameslack' ), hameslack_default_channel() ) ?>
+								<?php printf( __( 'Message will be sent to Slack <code>%s</code>. Try and check it.', 'hameslack' ), hameslack_default_channel() ) ?>
                             </p>
                         </td>
                     </tr>
@@ -103,11 +119,11 @@ add_action( 'admin_menu', function () {
             <pre style="margin: 2em 0; padding: 1em; color: #000; background: #ddd;">
 // <?php _e( 'Default Usage', 'hameslack' ) ?>
 
-do_action( 'hameslack', $text, $attachments, $channel );
+                do_action( 'hameslack', $text, $attachments, $channel );
 
 // <?php _e( 'Example in <code>save_post</code> hook.', 'hameslack' ) ?>
 
-do_action(
+                do_action(
     'hameslack',
     '@here <?php _e( 'Post is waiting review. Go to admin screen and ', 'hameslack' ) ?>',
     [
@@ -121,7 +137,7 @@ do_action(
 );
 </pre>
             <p>
-                <?php printf( __( 'For more details and hooks, see our <a href="%s" target="_blank">documentation</a>.', 'hameslack' ), 'https://gianism.info/addon/hameslack/' ); ?>
+				<?php printf( __( 'For more details and hooks, see our <a href="%s" target="_blank">documentation</a>.', 'hameslack' ), 'https://gianism.info/addon/hameslack/' ); ?>
             </p>
 
             <hr/>
@@ -150,6 +166,7 @@ add_action( 'admin_init', function () {
 					throw new Exception( __( 'Nonce is wrong access.', 'hameslack' ), 401 );
 				}
 				update_option( 'hameslack_payload_url', $_POST['slack_url'] );
+				update_option( 'hameslack_outgoing', isset( $_POST['slack_outgoing'] ) && $_POST['slack_outgoing'] );
 				wp_safe_redirect( admin_url( 'options-general.php?page=hameslack&hameslack_msg=updated' ) );
 				exit;
 				break;
