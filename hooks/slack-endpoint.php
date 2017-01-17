@@ -38,13 +38,19 @@ add_action( 'edit_form_after_title', function ( $post ) {
 	wp_nonce_field( 'hameslack_hash', '_hameslacknonce', false );
 	$hash = get_post_meta( $post->ID, '_hameslack_hash', true );
 	?>
-    <table class="form-table">
+    <style type="text/css">
+        .hameslack-table input[type=text]{
+            box-sizing: border-box;
+            width: 100%;
+        }
+    </style>
+    <table class="form-table hameslack-table">
         <tr>
             <th>
                 <label for="hameslack_hash"><?php _e( 'Hash Key', 'hameslack' ) ?></label>
             </th>
             <td>
-                <input type="text" class="regular-text" name="hameslack_hash" id="hameslack_hash"
+                <input type="text" class="regular-text" name="hameslack_hash" id="hameslack_hash" readonly
                        value="<?php echo esc_attr( $hash ) ?>"
                        placeholder="<?php esc_attr_e( 'Generate automatically', 'hameslack' ) ?>"/>
             </td>
@@ -63,6 +69,18 @@ add_action( 'edit_form_after_title', function ( $post ) {
 						<?php _e( 'Endpoint URL will be issued when you publish post.', 'hameslack' ) ?>
                     </p>
 				<?php endif; ?>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <label for="hameslack_token"><?php _e( 'Token', 'hameslack' ) ?></label>
+            </th>
+            <td>
+                    <input type="text" class="regular-text" name="hameslack_token" id="hameslack_token"
+                           value="<?php echo esc_attr( get_post_meta( $post->ID, '_hameslack_token', true ) ) ?>"/>
+                <p class="description">
+                    <?php printf( __( 'You can get this token by registering <a href="%s" target="_blank">outgoing webhook</a>.', 'hameslack' ), 'https://api.slack.com/outgoing-webhooks' ) ?>
+                </p>
             </td>
         </tr>
         <tr>
@@ -94,6 +112,7 @@ add_action( 'save_post', function ( $post_id, $post ) {
 		$hash = str_replace( '$', 'D', $hash );
 		update_post_meta( $post_id, '_hameslack_hash', $hash );
 	}
+    update_post_meta( $post_id, '_hameslack_token', $_POST['hameslack_token'] );
 }, 10, 2 );
 
 // Register rest route
@@ -105,6 +124,9 @@ add_action( 'rest_api_init', function () {
 				'hash' => [
 					'required' => true,
 				],
+                'token' => [
+                        'required' => true,
+                ],
 			],
 			'callback' => function ( $params ) {
 				$posts = get_posts( [
@@ -117,11 +139,15 @@ add_action( 'rest_api_init', function () {
 							'key'   => '_hameslack_hash',
 							'value' => $params['hash'],
 						],
+                        [
+                            'key' => '_hameslack_token',
+                            'value' => $params['token'],
+                        ],
 					],
 				] );
 				if ( ! $posts ) {
 					return new WP_REST_Response( [
-						'text' => __( 'No API found.', 'hameslack' ),
+						'text' => __( 'No API found. Token or URL is invalid.', 'hameslack' ),
 					] );
 				}
 				/**
