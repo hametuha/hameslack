@@ -39,7 +39,7 @@ add_action( 'edit_form_after_title', function ( $post ) {
 	$hash = get_post_meta( $post->ID, '_hameslack_hash', true );
 	?>
     <style type="text/css">
-        .hameslack-table input[type=text]{
+        .hameslack-table input[type=text] {
             box-sizing: border-box;
             width: 100%;
         }
@@ -76,10 +76,10 @@ add_action( 'edit_form_after_title', function ( $post ) {
                 <label for="hameslack_token"><?php _e( 'Token', 'hameslack' ) ?></label>
             </th>
             <td>
-                    <input type="text" class="regular-text" name="hameslack_token" id="hameslack_token"
-                           value="<?php echo esc_attr( get_post_meta( $post->ID, '_hameslack_token', true ) ) ?>"/>
+                <input type="text" class="regular-text" name="hameslack_token" id="hameslack_token"
+                       value="<?php echo esc_attr( get_post_meta( $post->ID, '_hameslack_token', true ) ) ?>"/>
                 <p class="description">
-                    <?php printf( __( 'You can get this token by registering <a href="%s" target="_blank">outgoing webhook</a>.', 'hameslack' ), 'https://api.slack.com/outgoing-webhooks' ) ?>
+					<?php printf( __( 'You can get this token by registering <a href="%s" target="_blank">outgoing webhook</a>.', 'hameslack' ), 'https://api.slack.com/outgoing-webhooks' ) ?>
                 </p>
             </td>
         </tr>
@@ -109,10 +109,17 @@ add_action( 'save_post', function ( $post_id, $post ) {
 	$current_hash = get_post_meta( $post->ID, '_hameslack_hash', true );
 	if ( ( isset( $_POST['hameslack_regen'] ) && $_POST['hameslack_regen'] ) || ! $current_hash ) {
 		$hash = wp_hash_password( current_time( 'mysql' ) . get_permalink( $post ) );
-		$hash = str_replace( '$', 'D', $hash );
+		foreach (
+			[
+				'$' => 'D',
+				'/' => 'S',
+			] as $str => $repl
+		) {
+			$hash = str_replace( $str, $repl, $hash );
+		}
 		update_post_meta( $post_id, '_hameslack_hash', $hash );
 	}
-    update_post_meta( $post_id, '_hameslack_token', $_POST['hameslack_token'] );
+	update_post_meta( $post_id, '_hameslack_token', $_POST['hameslack_token'] );
 }, 10, 2 );
 
 // Register rest route
@@ -121,12 +128,12 @@ add_action( 'rest_api_init', function () {
 		[
 			'methods'  => 'POST',
 			'args'     => [
-				'hash' => [
+				'hash'  => [
 					'required' => true,
 				],
-                'token' => [
-                        'required' => true,
-                ],
+				'token' => [
+					'required' => true,
+				],
 			],
 			'callback' => function ( $params ) {
 				$posts = get_posts( [
@@ -139,10 +146,10 @@ add_action( 'rest_api_init', function () {
 							'key'   => '_hameslack_hash',
 							'value' => $params['hash'],
 						],
-                        [
-                            'key' => '_hameslack_token',
-                            'value' => $params['token'],
-                        ],
+						[
+							'key'   => '_hameslack_token',
+							'value' => $params['token'],
+						],
 					],
 				] );
 				if ( ! $posts ) {
