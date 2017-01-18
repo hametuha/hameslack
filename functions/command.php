@@ -82,7 +82,6 @@ class HameSlackCommand extends WP_CLI_Command {
 		}
 		$table = new cli\Table();
 		$table->setHeaders( [ 'Name', 'ID', 'Full Name', 'Mail', 'Admin' ] );
-		var_dump( $users );
 		foreach ( $users as $user ) {
 			$table->addRow( [
 				$user->name,
