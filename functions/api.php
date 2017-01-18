@@ -120,3 +120,82 @@ function hameslack_bot_request( $method, $endpoint, $params = [] ) {
 	}
 	return $response;
 }
+
+/**
+ * Get user object on slack
+ *
+ * @package hameslack
+ * @since 1.0.0
+ * @param array $names Array of slack name of users.
+ *
+ * @return array|WP_Error
+ */
+function hameslack_members( $names = [] ) {
+	$response = hameslack_bot_request( 'GET', 'users.list' );
+	if ( is_wp_error( $response ) ) {
+		return $response;
+	}
+	if ( $names ) {
+		$users = array_filter( $response->members, function( $member ) use ( $names ) {
+			return false !== array_search( $member->name, $names );
+		} );
+	} else {
+		$users = $response->members;
+	}
+	return $users;
+}
+
+/**
+ * Get channel id of Slack by name.
+ *
+ * @package hameslack
+ * @since 1.0.0
+ * @param string $channel_label
+ *
+ * @return string|WP_Error
+ */
+function hameslack_channel_id( $channel_label ) {
+	$channel_label = trim( $channel_label, '#' );
+	$response = hameslack_bot_request( 'GET', 'channels.list' );
+	if ( is_wp_error( $response ) ) {
+		return $response;
+	}
+	foreach ( $response->channels as $channel ) {
+		if ( $channel_label == $channel->name ) {
+			return $channel->id;
+		}
+	}
+	return new WP_Error( 404, sprintf( __( 'Channel %s not found.', 'hameslack' ), $channel_label ) );
+}
+
+/**
+ * Get channel messages.
+ *
+ * @package hameslack
+ * @since 1.0.0
+ * @param string $channel
+ * @param int $oldest Timestamp. Default is oldest.
+ * @param int $latest Timestamp. Default is now.
+ * @param array $args Arguments to pass. see https://api.slack.com/methods/channels.history
+ *
+ * @return object|string|WP_Error
+ */
+function hameslack_channel_history( $channel, $oldest = -1, $latest = -1, $args = [] ) {
+	$channel_id = hameslack_channel_id( $channel );
+	if ( is_wp_error( $channel_id ) ) {
+		return $channel_id;
+	}
+	if ( 0 > $oldest ) {
+		$oldest = 0;
+	}
+	if ( 0 > $latest ) {
+		$latest = current_time( 'timestamp' );
+	}
+	$args = wp_parse_args( [
+		'channel' => $channel_id,
+		'latest'  => $latest,
+		'oldest'  => $oldest,
+	], $args );
+	$response = hameslack_bot_request( 'GET', 'channels.history', $args );
+	return is_wp_error( $response ) ? $response : $response->messages ;
+}
