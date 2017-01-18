@@ -10,6 +10,7 @@ add_action( 'init', function () {
 			'label'    => __( 'Slack Endpoint', 'hameslack' ),
 			'public'   => false,
 			'show_ui'  => true,
+            'menu_icon' => 'dashicons-share-alt',
 			'supports' => [ 'title', 'excerpt', 'slug', 'author' ],
 		];
 		/**
@@ -65,7 +66,7 @@ add_action( 'edit_form_after_title', function ( $post ) {
                            value="<?php echo esc_attr( rest_url( "hameslack/v1/outgoing/{$hash}" ) ) ?>"/>
 				<?php else : ?>
                     <p class="description">
-                        <span class="dashicons dashicons-no"></span>
+                        <span class="dashicons dashicons-dismiss"></span>
 						<?php _e( 'Endpoint URL will be issued when you publish post.', 'hameslack' ) ?>
                     </p>
 				<?php endif; ?>
