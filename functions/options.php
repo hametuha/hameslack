@@ -102,3 +102,34 @@ function hameslack_is_debug() {
 	 */
 	return apply_filters( 'hameslack_is_debug', ( defined( 'WP_DEBUG' ) && WP_DEBUG ) );
 }
+
+/**
+ * Get bot key
+ *
+ * @param bool $raw
+ *
+ * @return mixed|void
+ */
+function hameslack_bot_key( $raw = false ) {
+	$key = get_option( 'hameslack_bot_key', '' );
+	if ( $raw ) {
+		return $key;
+	}
+	if ( defined( 'SLACK_BOT_KEY' ) ) {
+		$key = SLACK_BOT_KEY;
+	}
+
+	/**
+	 * hameslack_bot_key
+	 *
+	 * Bot key
+	 *
+	 * @package hameslack
+	 * @since 1.0.0
+	 * @filter hameslack_bot_key
+	 * @param string $key
+	 * @return string
+	 */
+	return apply_filters( 'hameslack_bot_key', $key );
+}
+

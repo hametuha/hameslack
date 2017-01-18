@@ -3,6 +3,12 @@
  * Endpoint hooks
  */
 
+defined( 'ABSPATH' ) or die();
+
+if ( defined( 'WP_CLI' ) ) {
+    WP_CLI::add_command( 'hameslack', 'HameSlackCommand' );
+}
+
 // Register post type
 add_action( 'init', function () {
 	if ( hameslack_use_outgoing() ) {

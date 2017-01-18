@@ -57,7 +57,7 @@ add_action( 'admin_menu', function () {
                                    placeholder="https://hooks.slack.com/services/long-key/another-key/very-long-key"/>
 							<?php if ( defined( 'SLACK_ENDPOINT' ) ) : ?>
                                 <p>
-									<?php printf( __( 'You defined constant <strong>SLACK_ENDPOINT</strong>, so <code>%s</code> will be used instead.', 'hameslack' ), SLACK_ENDPOINT ); ?>
+									<?php printf( __( 'You defined constant <strong>%s</strong>, so <code>%s</code> will be used instead.', 'hameslack' ), 'SLACK_ENDPOINT', SLACK_ENDPOINT ); ?>
                                 </p>
 							<?php endif; ?>
                             <p class="description">
@@ -82,6 +82,24 @@ add_action( 'admin_menu', function () {
 							<?php endif; ?>
                             <p class="description">
 								<?php printf( __( 'If you enable this, <a href="%s" target="_blank">outgoing webhook</a> is enabled.', 'hameslack' ), 'https://api.slack.com/outgoing-webhooks' ); ?>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="slack_bot"><?php _e( 'Bot API Key', 'hameslack' ) ?></label>
+                        </th>
+                        <td>
+                            <input type="text" class="regular-text" name="slack_bot" id="slack_bot"
+                                   value="<?php echo esc_attr( hameslack_bot_key( true ) ) ?>"
+                                   placeholder="abcdefghijklmnoPqrstuvwxyz"/>
+							<?php if ( defined( 'SLACK_BOT_KEY' ) ) : ?>
+                                <p>
+									<?php printf( __( 'You defined constant <strong>%s</strong>, so <code>%s</code> will be used instead.', 'hameslack' ), 'SLACK_BOT_KEY', SLACK_BOT_KEY ); ?>
+                                </p>
+							<?php endif; ?>
+                            <p class="description">
+								<?php printf( __( 'You can get bot api key <a href="%s" target="_blank">here</a>.', 'hameslack' ), 'https://api.slack.com/bot-users' ); ?>
                             </p>
                         </td>
                     </tr>
@@ -167,6 +185,7 @@ add_action( 'admin_init', function () {
 				}
 				update_option( 'hameslack_payload_url', $_POST['slack_url'] );
 				update_option( 'hameslack_outgoing', isset( $_POST['slack_outgoing'] ) && $_POST['slack_outgoing'] );
+				update_option( 'hameslack_bot_key', $_POST['slack_bot'] );
 				wp_safe_redirect( admin_url( 'options-general.php?page=hameslack&hameslack_msg=updated' ) );
 				exit;
 				break;
