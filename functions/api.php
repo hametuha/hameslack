@@ -191,11 +191,11 @@ function hameslack_channel_history( $channel, $oldest = -1, $latest = -1, $args 
 	if ( 0 > $latest ) {
 		$latest = current_time( 'timestamp' );
 	}
-	$args = wp_parse_args( [
+	$args = wp_parse_args( $args, [
 		'channel' => $channel_id,
 		'latest'  => $latest,
 		'oldest'  => $oldest,
-	], $args );
+	] );
 	$response = hameslack_bot_request( 'GET', 'channels.history', $args );
 	return is_wp_error( $response ) ? $response : $response->messages ;
 }
