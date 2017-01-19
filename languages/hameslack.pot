@@ -1,0 +1,213 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: HameSlack\n"
+"POT-Creation-Date: 2017-01-19 18:39+0900\n"
+"PO-Revision-Date: 2017-01-19 18:39+0900\n"
+"Last-Translator: Takahashi Fumiki <takahashi.fumiki@hametuha.co.jp>\n"
+"Language-Team: Hametuha INC. <takahashi.fumiki@hametuha.co.jp>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: node_modules\n"
+"X-Poedit-SearchPathExcluded-1: vendor\n"
+
+#: functions/api.php:23
+#, fuzzy
+msgid "Payload URL is not set."
+msgstr "Item set"
+
+#: functions/api.php:77
+msgid "Token is required."
+msgstr ""
+
+#: functions/api.php:101
+msgid "Only GET or POST is allowed."
+msgstr ""
+
+#: functions/api.php:116
+msgid "Failed to parse response. something might be wrong."
+msgstr ""
+
+#: functions/api.php:168
+#, php-format
+msgid "Channel %s not found."
+msgstr ""
+
+#: hameslack.php:31
+#, php-format
+msgid ""
+"[Hameslack] Sorry, this plugin requires PHP %s and over, but your PHP is %s."
+msgstr ""
+
+#: hooks/setting.php:15
+msgid "HameSlack Setting"
+msgstr ""
+
+#: hooks/setting.php:26
+#, php-format
+msgid "Set up this page to enable <a href=\"%s\">Slack</a>."
+msgstr ""
+
+#: hooks/setting.php:33
+msgid "Option is properly updated."
+msgstr ""
+
+#: hooks/setting.php:36
+msgid "Successfully posted to Slack. Open slack and check it."
+msgstr ""
+
+#: hooks/setting.php:40
+msgid "Unregistered message. Are you cheating?"
+msgstr ""
+
+#: hooks/setting.php:52
+msgid "Payload URL"
+msgstr ""
+
+#: hooks/setting.php:60 hooks/setting.php:98
+#, php-format
+msgid ""
+"You defined constant <strong>%s</strong>, so <code>%s</code> will be used "
+"instead."
+msgstr ""
+
+#: hooks/setting.php:64
+#, php-format
+msgid ""
+"You can get payload URL for Webhooks <a href=\"%s\" target=\"_blank\">here</"
+"a>."
+msgstr ""
+
+#: hooks/setting.php:70
+msgid "Outgoing Webhook"
+msgstr ""
+
+#: hooks/setting.php:76
+msgid "Use outgoing web hook"
+msgstr ""
+
+#: hooks/setting.php:80
+#, php-format
+msgid "You defined constant <strong>SLACK_USE_OUTGOING</strong>, so always %s."
+msgstr ""
+
+#: hooks/setting.php:84
+#, php-format
+msgid ""
+"If you enable this, <a href=\"%s\" target=\"_blank\">outgoing webhook</a> is "
+"enabled."
+msgstr ""
+
+#: hooks/setting.php:90
+#, fuzzy
+msgid "Bot API Key"
+msgstr "公開キーと秘密キーは必須です。"
+
+#: hooks/setting.php:102
+#, php-format
+msgid "You can get bot api key <a href=\"%s\" target=\"_blank\">here</a>."
+msgstr ""
+
+#: hooks/setting.php:112
+msgid "Test Connection"
+msgstr ""
+
+#: hooks/setting.php:119
+#, fuzzy
+msgid "Text to post"
+msgstr "Post Type"
+
+#: hooks/setting.php:125
+#, php-format
+msgid "Message will be sent to Slack <code>%s</code>. Try and check it."
+msgstr ""
+
+#: hooks/setting.php:135
+msgid "How to Use"
+msgstr ""
+
+#: hooks/setting.php:137
+msgid "This plugin does nothing by default. "
+msgstr ""
+
+#: hooks/setting.php:140
+#, php-format
+msgid ""
+"For more details and hooks, see our <a href=\"%s\" target=\"_blank"
+"\">documentation</a>."
+msgstr ""
+
+#: hooks/setting.php:159 hooks/setting.php:169
+#, fuzzy
+msgid "Nonce is wrong access."
+msgstr "不正なアクセスです。"
+
+#: hooks/setting.php:172
+#, fuzzy
+msgid "Text is not set."
+msgstr "Item set"
+
+#: hooks/setting.php:182
+msgid "Bad request."
+msgstr ""
+
+#: hooks/setting.php:217
+#, php-format
+msgid "You should set up plugin <a href=\"%s\">here</a>."
+msgstr ""
+
+#: hooks/slack-endpoint.php:16
+msgid "Slack Endpoint"
+msgstr ""
+
+#: hooks/slack-endpoint.php:57
+msgid "Hash Key"
+msgstr ""
+
+#: hooks/slack-endpoint.php:62
+msgid "Generate automatically"
+msgstr ""
+
+#: hooks/slack-endpoint.php:67 hooks/slack-endpoint.php:213
+msgid "Endpoint"
+msgstr ""
+
+#: hooks/slack-endpoint.php:76
+msgid "Endpoint URL will be issued when you publish post."
+msgstr ""
+
+#: hooks/slack-endpoint.php:83
+msgid "Token"
+msgstr ""
+
+#: hooks/slack-endpoint.php:89
+#, php-format
+msgid ""
+"You can get this token by registering <a href=\"%s\" target=\"_blank"
+"\">outgoing webhook</a>."
+msgstr ""
+
+#: hooks/slack-endpoint.php:95
+msgid "Hash Control"
+msgstr ""
+
+#: hooks/slack-endpoint.php:100
+msgid "Regenerate Hash"
+msgstr ""
+
+#: hooks/slack-endpoint.php:164
+msgid "No API found. Token or URL is invalid."
+msgstr ""
+
+#: hooks/slack-endpoint.php:229
+msgid "Not Generated"
+msgstr ""

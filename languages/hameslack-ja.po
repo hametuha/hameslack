@@ -1,0 +1,245 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2017-01-19 18:39+0900\n"
+"PO-Revision-Date: 2017-01-19 18:39+0900\n"
+"Last-Translator: Takahashi Fumiki <takahashi.fumiki@hametuha.co.jp>\n"
+"Language-Team: \n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.1\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: functions/api.php:23
+msgid "Payload URL is not set."
+msgstr "Payload URLが設定されていません。"
+
+#: functions/api.php:77
+msgid "Token is required."
+msgstr "トークンは必須です。"
+
+#: functions/api.php:101
+msgid "Only GET or POST is allowed."
+msgstr "GETまたはPOSTだけが利用できます。"
+
+#: functions/api.php:116
+msgid "Failed to parse response. something might be wrong."
+msgstr "レスポンスを解析できませんでした。なにかがおかしいようです。"
+
+#: functions/api.php:168
+#, php-format
+msgid "Channel %s not found."
+msgstr "チャンネル %s は見つかりませんでした。"
+
+#: hameslack.php:31
+#, php-format
+msgid ""
+"[Hameslack] Sorry, this plugin requires PHP %s and over, but your PHP is %s."
+msgstr ""
+"[HameSlack] 申し訳ございません、このプラグインはPHP%s以上が必須です。あなたの"
+"PHPは%sです。"
+
+#: hooks/setting.php:15
+msgid "HameSlack Setting"
+msgstr "HameSlack設定"
+
+#: hooks/setting.php:26
+#, php-format
+msgid "Set up this page to enable <a href=\"%s\">Slack</a>."
+msgstr ""
+"<a href=\"%s\">Slack</a>を有効にするために、このページで設定を行なってくださ"
+"い。"
+
+#: hooks/setting.php:33
+msgid "Option is properly updated."
+msgstr "設定は更新されました。"
+
+#: hooks/setting.php:36
+msgid "Successfully posted to Slack. Open slack and check it."
+msgstr "Slackへの投稿が成功しました。Slackを開いてチェックしてください。"
+
+#: hooks/setting.php:40
+msgid "Unregistered message. Are you cheating?"
+msgstr "登録されていないメッセージです。なにか変なことをしましたか？"
+
+#: hooks/setting.php:52
+msgid "Payload URL"
+msgstr "Payload URL"
+
+#: hooks/setting.php:60 hooks/setting.php:98
+#, php-format
+msgid ""
+"You defined constant <strong>%s</strong>, so <code>%s</code> will be used "
+"instead."
+msgstr ""
+"あなたは定数<strong>%s</strong>を定義しています。そのため、<code>%s</code>が"
+"常に使われます。"
+
+#: hooks/setting.php:64
+#, php-format
+msgid ""
+"You can get payload URL for Webhooks <a href=\"%s\" target=\"_blank\">here</"
+"a>."
+msgstr ""
+"<a href=\"%s\" target=\"_blank\">ここ</a>からWebhook用のPayload URLを取得でき"
+"ます。"
+
+#: hooks/setting.php:70
+msgid "Outgoing Webhook"
+msgstr "Outgoing Webhook"
+
+#: hooks/setting.php:76
+msgid "Use outgoing web hook"
+msgstr "outgoind webhook を利用する"
+
+#: hooks/setting.php:80
+#, php-format
+msgid "You defined constant <strong>SLACK_USE_OUTGOING</strong>, so always %s."
+msgstr ""
+"あなたは定数<strong>SLACK_USE_OUTGOING</strong>を定義しています。そのため、常"
+"に%sとなります。"
+
+#: hooks/setting.php:84
+#, php-format
+msgid ""
+"If you enable this, <a href=\"%s\" target=\"_blank\">outgoing webhook</a> is "
+"enabled."
+msgstr ""
+"これを有効にすると、<a href=\"%s\" target=\"_blank\">outgoing webhook</a>が有"
+"効になります。"
+
+#: hooks/setting.php:90
+msgid "Bot API Key"
+msgstr "ボットAPIキー"
+
+#: hooks/setting.php:102
+#, php-format
+msgid "You can get bot api key <a href=\"%s\" target=\"_blank\">here</a>."
+msgstr ""
+"ボットのAPIキーを<a href=\"%s\" target=\"_blank\">こちら</a>で取得できます。"
+
+#: hooks/setting.php:112
+msgid "Test Connection"
+msgstr "接続確認"
+
+#: hooks/setting.php:119
+msgid "Text to post"
+msgstr "投稿するテキスト"
+
+#: hooks/setting.php:125
+#, php-format
+msgid "Message will be sent to Slack <code>%s</code>. Try and check it."
+msgstr ""
+"メッセージはSlackの<code>%s</code>に送信されます。実行と確認をお願いします。"
+
+#: hooks/setting.php:135
+msgid "How to Use"
+msgstr "使用法"
+
+#: hooks/setting.php:137
+msgid "This plugin does nothing by default. "
+msgstr "このプラグインは初期設定で何もしません。"
+
+#: hooks/setting.php:140
+#, php-format
+msgid ""
+"For more details and hooks, see our <a href=\"%s\" target=\"_blank"
+"\">documentation</a>."
+msgstr ""
+"さらに詳しく知るためには、<a href=\"%s\" target=\"_blank\">ドキュメンテーショ"
+"ン</a>をご覧ください。"
+
+#: hooks/setting.php:159 hooks/setting.php:169
+msgid "Nonce is wrong access."
+msgstr "ナンスが異常です。"
+
+#: hooks/setting.php:172
+msgid "Text is not set."
+msgstr "テキストが設定されていません。"
+
+#: hooks/setting.php:182
+msgid "Bad request."
+msgstr "不正なリクエストです。"
+
+#: hooks/setting.php:217
+#, php-format
+msgid "You should set up plugin <a href=\"%s\">here</a>."
+msgstr "<a href=\"%s\">こちら</a>からプラグインを設定してください。"
+
+#: hooks/slack-endpoint.php:16
+msgid "Slack Endpoint"
+msgstr "Slack エンドポイント"
+
+#: hooks/slack-endpoint.php:57
+msgid "Hash Key"
+msgstr "ハッシュキー"
+
+#: hooks/slack-endpoint.php:62
+msgid "Generate automatically"
+msgstr "自動で生成されます。"
+
+#: hooks/slack-endpoint.php:67 hooks/slack-endpoint.php:213
+msgid "Endpoint"
+msgstr "エンドポイント"
+
+#: hooks/slack-endpoint.php:76
+msgid "Endpoint URL will be issued when you publish post."
+msgstr "投稿を公開すると、エンドポイントURLが発行されます。"
+
+#: hooks/slack-endpoint.php:83
+msgid "Token"
+msgstr "トークン"
+
+#: hooks/slack-endpoint.php:89
+#, php-format
+msgid ""
+"You can get this token by registering <a href=\"%s\" target=\"_blank"
+"\">outgoing webhook</a>."
+msgstr ""
+"<a href=\"%s\" target=\"_blank\">outgoing webhook</a>を登録することでトークン"
+"が取得できます。"
+
+#: hooks/slack-endpoint.php:95
+msgid "Hash Control"
+msgstr "ハッシュ管理"
+
+#: hooks/slack-endpoint.php:100
+msgid "Regenerate Hash"
+msgstr "ハッシュを再生成する"
+
+#: hooks/slack-endpoint.php:164
+msgid "No API found. Token or URL is invalid."
+msgstr "APIが見つかりませんでした。トークンまたはURLが間違っています。"
+
+#: hooks/slack-endpoint.php:229
+msgid "Not Generated"
+msgstr "生成されていません"
+
+#~ msgid "Flexible Usage"
+#~ msgstr "柔軟な使用方法"
+
+#~ msgid ""
+#~ "This plugin does nothing by default. You can make slack call with "
+#~ "<code>do_action</code> anytime you need."
+#~ msgstr ""
+#~ "このプラグインは初期設定で何もしません。あなたはSlackへの問い合わせを"
+#~ "<code>do_action</code>を使うことでいつでも行えます。"
+
+#~ msgid "Default Usage"
+#~ msgstr "普通の使用方法"
+
+#~ msgid "Example in <code>save_post</code> hook."
+#~ msgstr "<code>save_post</code>フックの例です。"
+
+#~ msgid "Post is waiting review. Go to admin screen and "
+#~ msgstr "投稿がレビュー待ちです。管理画面へ行ってください。"
+
+#~ msgid "Support"
+#~ msgstr "サポート"
+
+#~ msgid "Go to <a href=\"%s\" target=\"_blank\">support forum</a>."
+#~ msgstr ""
+#~ "<a href=\"%s\" target=\"_blank\">サポートフォーラム</a>に行ってください。"

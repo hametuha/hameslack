@@ -132,37 +132,12 @@ add_action( 'admin_menu', function () {
 
             <hr/>
 
-            <h2><?php _e( 'Flexible Usage', 'hameslack' ) ?></h2>
-            <p><?php _e( 'This plugin does nothing by default. You can make slack call with <code>do_action</code> anytime you need.', 'hameslack' ) ?></p>
-            <pre style="margin: 2em 0; padding: 1em; color: #000; background: #ddd;">
-// <?php _e( 'Default Usage', 'hameslack' ) ?>
-
-                do_action( 'hameslack', $text, $attachments, $channel );
-
-// <?php _e( 'Example in <code>save_post</code> hook.', 'hameslack' ) ?>
-
-                do_action(
-    'hameslack',
-    '@here <?php _e( 'Post is waiting review. Go to admin screen and ', 'hameslack' ) ?>',
-    [
-        [
-            'title'       => get_the_title( $post ),
-            'title_link'  => get_edit_post_link( $post->ID, 'mail' ),
-            'color'       => 'danger',
-        ]
-    ],
-    '#news'
-);
-</pre>
+            <h2><?php _e( 'How to Use', 'hameslack' ) ?></h2>
             <p>
-				<?php printf( __( 'For more details and hooks, see our <a href="%s" target="_blank">documentation</a>.', 'hameslack' ), 'https://gianism.info/addon/hameslack/' ); ?>
+                <?php _e( 'This plugin does nothing by default. ', 'hameslack' ) ?>
             </p>
-
-            <hr/>
-
-            <h2><?php _e( 'Support', 'hameslack' ) ?></h2>
-            <p>
-				<?php printf( __( 'Go to <a href="%s" target="_blank">support forum</a>.', 'hameslack' ), 'https://gianism.info/addon/hameslack/' ); ?>
+			<p>
+                <?php printf( __( 'For more details and hooks, see our <a href="%s" target="_blank">documentation</a>.', 'hameslack' ), 'https://gianism.info/addon/hameslack/' ); ?>
             </p>
         </div>
 		<?php
