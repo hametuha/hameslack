@@ -14,6 +14,11 @@ A Slack utility for WordPress.
 
 This plugin integrates [Slack](https://slack.com) and WordPress.
 
+![Travis](https://travis-ci.org/hametuha/hameslack.svg)
+![Donwloads](https://img.shields.io/wordpress/plugin/dt/hameslack.svg)
+![Version](https://img.shields.io/wordpress/plugin/v/hameslack.svg)
+![Rating](https://img.shields.io/wordpress/plugin/r/hameslack.svg)
+
 ### Core Conception
 
 By default, this plugin does nothing. It's true. 
