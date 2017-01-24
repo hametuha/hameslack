@@ -4,7 +4,7 @@ Tags: slack
 Contributors: Takahashi_Fumiki  
 Tested up to: 4.7.0  
 Requires at least: 4.6.0  
-Stable Tag: 1.0.1
+Stable Tag: 1.0.2
 License: GPLv3 or later  
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -81,7 +81,7 @@ If you have any request, please make issue on [github](https://github.com/hametu
 
 ## Changelog
 
-### 1.0.1
+### 1.0.2
 
 - Add auto deploy
 
