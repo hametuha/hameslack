@@ -1,20 +1,20 @@
-# HameSlack
+=== HameSlack ===
 
 Tags: slack  
 Contributors: Takahashi_Fumiki  
 Tested up to: 4.7.0  
 Requires at least: 4.6.0  
-Stable Tag: 1.0.1
+Stable Tag: 1.0.0  
 License: GPLv3 or later  
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
 A Slack utility for WordPress.
 
-## Description
+== Description ==
 
 This plugin integrates [Slack](https://slack.com) and WordPress.
 
-### Core Conception
+= Core Conception =
 
 By default, this plugin does nothing. It's true. 
 Slack has many API intergrations, but **hameslack** uses 3 of them.
@@ -25,7 +25,7 @@ Slack has many API intergrations, but **hameslack** uses 3 of them.
 
 Upper is easier. This plugin helps the connection between Slack and WordPress and you can concentrate on what you should do with slack.
 
-### Use Cases
+= Use Cases =
 
 Here is a list of use case of us on WordPress with many editors.
 
@@ -35,7 +35,7 @@ Here is a list of use case of us on WordPress with many editors.
 
 For more details, please read our [Documentation](https://gianism.info/add-on/hameslack/). We have some samples.
 
-### How to Integrate
+= How to Integrate =
 
 The simplest usage is *post to slack*. You can do like below:
 
@@ -48,38 +48,34 @@ Function is also available, but I prefer to use `do_action` to avoid annoying `i
 Everything works fine if you set properly.
 
 
-## Install
+== Install ==
 
-### From Plugin Repository
+= From Plugin Repository =
 
 Click install and activate it.
 
-### From Github
+= From Github =
 
 Download and you can use it. Any pull requests are welcomed.
 
-### Enter API Key
+= Enter API Key =
 
 At least, you need [Slack Payload URL for Incoming Webhooks](https://api.slack.com/incoming-webhooks). For more details, go to our [support site](https://gianism.info/add-on/hameslack/).
 
-### Do something
+= Do something =
 
 As mentioned avobe, this plugin does nothing by default. Please read our [Documentation](https://gianism.info/add-on/hameslack/).
 
 If you have any request, please make issue on [github](https://github.com/hametuha/hameslack).
 
-## Screenshots
+== Screenshots ==
 
 1. You can create such kind of bot.
 2. You can set up everything on setting screen.
 3. You can create Outgoing Webhooks as custom post type.
 
-## Changelog
+== Changelog ==
 
-### 1.0.1
+= 1.0.0 =
 
-- Add auto deploy
-
-### 1.0.0
-
-- First release.
+* First release.
