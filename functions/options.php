@@ -32,6 +32,15 @@ function hameslack_payload_url( $raw = false ) {
 }
 
 /**
+ * API token for invite
+ *
+ * @return string
+ */
+function hameslack_invite_api_token() {
+	return (string) get_option( 'hameslack_invite_api_token', '' );
+}
+
+/**
  * Whether to use outgoing webhook
  *
  * @param bool $raw

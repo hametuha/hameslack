@@ -79,7 +79,14 @@ function hameslack_bot_request( $method, $endpoint, $params = [] ) {
 	$params = array_merge( [ 'token' => $token ], $params );
 	$params_escaped = [];
 	foreach ( $params as $key => $value ) {
-		$params_escaped[ $key ] = rawurlencode( $value );
+		switch ( $key ) {
+			case 'email':
+				$params_escaped[ $key ] = $value;
+				break;
+			default:
+				$params_escaped[ $key ] = rawurlencode( $value );
+				break;
+		}
 	}
 	// Build curl options
 	$options = [
@@ -113,10 +120,14 @@ function hameslack_bot_request( $method, $endpoint, $params = [] ) {
 	curl_close( $ch );
 	$response = json_decode( $result );
 	if ( ! $response ) {
-		return new WP_Error( 500, __( 'Failed to parse response. something might be wrong.', 'hameslack' ) );
+		return new WP_Error( 500, __( 'Failed to parse response. something might be wrong.', 'hameslack' ), [
+			'status' => 500,
+		] );
 	}
 	if ( ! $response->ok ) {
-		return new WP_Error( 500, $response->error );
+		return new WP_Error( 500, $response->error, [
+			'status' => 500,
+		] );
 	}
 	return $response;
 }
@@ -165,6 +176,7 @@ function hameslack_channel_id( $channel_label ) {
 			return $channel->id;
 		}
 	}
+	// translators: %s channel label.
 	return new WP_Error( 404, sprintf( __( 'Channel %s not found.', 'hameslack' ), $channel_label ) );
 }
 
@@ -199,3 +211,4 @@ function hameslack_channel_history( $channel, $oldest = -1, $latest = -1, $args 
 	$response = hameslack_bot_request( 'GET', 'channels.history', $args );
 	return is_wp_error( $response ) ? $response : $response->messages ;
 }
+

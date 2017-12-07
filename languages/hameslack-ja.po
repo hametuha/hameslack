@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-01-19 18:39+0900\n"
-"PO-Revision-Date: 2017-01-19 18:39+0900\n"
+"POT-Creation-Date: 2017-12-07 17:32+0900\n"
+"PO-Revision-Date: 2017-12-07 17:36+0900\n"
 "Last-Translator: Takahashi Fumiki <takahashi.fumiki@hametuha.co.jp>\n"
 "Language-Team: \n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.1\n"
+"X-Generator: Poedit 2.0.4\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -21,18 +21,26 @@ msgstr "Payload URLが設定されていません。"
 msgid "Token is required."
 msgstr "トークンは必須です。"
 
-#: functions/api.php:101
+#: functions/api.php:108
 msgid "Only GET or POST is allowed."
 msgstr "GETまたはPOSTだけが利用できます。"
 
-#: functions/api.php:116
+#: functions/api.php:123
 msgid "Failed to parse response. something might be wrong."
 msgstr "レスポンスを解析できませんでした。なにかがおかしいようです。"
 
-#: functions/api.php:168
+#: functions/api.php:180
 #, php-format
 msgid "Channel %s not found."
 msgstr "チャンネル %s は見つかりませんでした。"
+
+#: functions/invititation.php:38
+msgid "API to invite user is not activated."
+msgstr "ユーザー招待のAPIは有効化されていません。"
+
+#: functions/invititation.php:42
+msgid "Specified user doesn't exist."
+msgstr "指定されたユーザーは存在しません。"
 
 #: hameslack.php:31
 #, php-format
@@ -41,6 +49,45 @@ msgid ""
 msgstr ""
 "[HameSlack] 申し訳ございません、このプラグインはPHP%s以上が必須です。あなたの"
 "PHPは%sです。"
+
+#: hooks/invite.php:10
+msgid "Slack User Name"
+msgstr "Slackユーザー名"
+
+#: hooks/invite.php:64
+msgid ""
+"Invitation mail has been sent! Please check mailbox and follow the "
+"instructions."
+msgstr ""
+"招待メールが送信されました！　メールの受信ボックスをチェックして、指示に従っ"
+"てください。"
+
+#: hooks/invite.php:98
+msgid "Failed to send request. Pleaes try again later, or contact to admin."
+msgstr ""
+"リクエストの送信に失敗しました。もう一度お試しになるか、管理者に問い合わせて"
+"ください。"
+
+#: hooks/invite.php:101
+msgid "Request to Slack"
+msgstr "Slackへの招待"
+
+#: hooks/invite.php:103
+msgid "Please request invitation to Slack by clicking the button below."
+msgstr "下のボタンを押してSlack への招待をリクエストしてください。"
+
+#: hooks/invite.php:107
+#, php-format
+msgid "You have already requested at %s."
+msgstr "あなたは %s にリクエスト済みです。"
+
+#: hooks/invite.php:113
+msgid "Resend Invitation"
+msgstr "招待メールを再送"
+
+#: hooks/invite.php:115
+msgid "Request Invitation"
+msgstr "招待をリクエスト"
 
 #: hooks/setting.php:15
 msgid "HameSlack Setting"
@@ -121,29 +168,40 @@ msgid "You can get bot api key <a href=\"%s\" target=\"_blank\">here</a>."
 msgstr ""
 "ボットのAPIキーを<a href=\"%s\" target=\"_blank\">こちら</a>で取得できます。"
 
-#: hooks/setting.php:112
+#: hooks/setting.php:108
+msgid "Invite Token"
+msgstr "招待用トークン"
+
+#: hooks/setting.php:115
+#, php-format
+msgid "You can get Legacy API Token <a href=\"%s\" target=\"_blank\">here</a>."
+msgstr ""
+"Legacy APIトークンを<a href=\"%s\" target=\"_blank\">こちら</a>で取得できま"
+"す。"
+
+#: hooks/setting.php:125
 msgid "Test Connection"
 msgstr "接続確認"
 
-#: hooks/setting.php:119
+#: hooks/setting.php:132
 msgid "Text to post"
 msgstr "投稿するテキスト"
 
-#: hooks/setting.php:125
+#: hooks/setting.php:138
 #, php-format
 msgid "Message will be sent to Slack <code>%s</code>. Try and check it."
 msgstr ""
 "メッセージはSlackの<code>%s</code>に送信されます。実行と確認をお願いします。"
 
-#: hooks/setting.php:135
+#: hooks/setting.php:148
 msgid "How to Use"
 msgstr "使用法"
 
-#: hooks/setting.php:137
+#: hooks/setting.php:150
 msgid "This plugin does nothing by default. "
 msgstr "このプラグインは初期設定で何もしません。"
 
-#: hooks/setting.php:140
+#: hooks/setting.php:153
 #, php-format
 msgid ""
 "For more details and hooks, see our <a href=\"%s\" target=\"_blank"
@@ -152,19 +210,19 @@ msgstr ""
 "さらに詳しく知るためには、<a href=\"%s\" target=\"_blank\">ドキュメンテーショ"
 "ン</a>をご覧ください。"
 
-#: hooks/setting.php:159 hooks/setting.php:169
+#: hooks/setting.php:173 hooks/setting.php:184
 msgid "Nonce is wrong access."
 msgstr "ナンスが異常です。"
 
-#: hooks/setting.php:172
+#: hooks/setting.php:187
 msgid "Text is not set."
 msgstr "テキストが設定されていません。"
 
-#: hooks/setting.php:182
+#: hooks/setting.php:197
 msgid "Bad request."
 msgstr "不正なリクエストです。"
 
-#: hooks/setting.php:217
+#: hooks/setting.php:232
 #, php-format
 msgid "You should set up plugin <a href=\"%s\">here</a>."
 msgstr "<a href=\"%s\">こちら</a>からプラグインを設定してください。"
@@ -179,7 +237,7 @@ msgstr "ハッシュキー"
 
 #: hooks/slack-endpoint.php:62
 msgid "Generate automatically"
-msgstr "自動で生成されます。"
+msgstr "自動で生成"
 
 #: hooks/slack-endpoint.php:67 hooks/slack-endpoint.php:213
 msgid "Endpoint"

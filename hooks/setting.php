@@ -103,6 +103,19 @@ add_action( 'admin_menu', function () {
                             </p>
                         </td>
                     </tr>
+					<tr>
+						<th>
+							<label for="hameslack_invite_api_token"><?php _e( 'Invite Token', 'hameslack' ) ?></label>
+						</th>
+						<td>
+							<input type="text" class="regular-text" name="hameslack_invite_api_token" id="hameslack_invite_api_token"
+								   value="<?php echo esc_attr( hameslack_invite_api_token() ) ?>"
+								   placeholder="ex: xoxp-asd013fsef0..."/>
+							<p class="description">
+								<?php printf( __( 'You can get Legacy API Token <a href="%s" target="_blank">here</a>.', 'hameslack' ), 'https://api.slack.com/custom-integrations/legacy-tokens' ); ?>
+							</p>
+						</td>
+					</tr>
                 </table>
 				<?php submit_button() ?>
             </form>
@@ -152,6 +165,7 @@ add_action( 'admin_init', function () {
 		// Do nothing.
 		return;
 	}
+	
 	try {
 		switch ( $_GET['hameslack_action'] ) {
 			case 'option':
@@ -161,6 +175,7 @@ add_action( 'admin_init', function () {
 				update_option( 'hameslack_payload_url', $_POST['slack_url'] );
 				update_option( 'hameslack_outgoing', isset( $_POST['slack_outgoing'] ) && $_POST['slack_outgoing'] );
 				update_option( 'hameslack_bot_key', $_POST['slack_bot'] );
+				update_option( 'hameslack_invite_api_token', $_POST['hameslack_invite_api_token'] );
 				wp_safe_redirect( admin_url( 'options-general.php?page=hameslack&hameslack_msg=updated' ) );
 				exit;
 				break;

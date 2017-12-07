@@ -2,9 +2,10 @@
 
 Tags: slack  
 Contributors: Takahashi_Fumiki  
-Tested up to: 4.7.0  
-Requires at least: 4.6.0  
-Stable Tag: 1.0.3
+Tested up to: 4.9.0  
+Requires at least: 4.7.0  
+Requires PHP: 5.4  
+Stable Tag: 1.1.0  
 License: GPLv3 or later  
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -27,6 +28,7 @@ Slack has many API intergrations, but **hameslack** uses 3 of them.
 - [Incoming Webhook](https://api.slack.com/incoming-webhooks) to post to slack.
 - [Outgoing Webhook](https://api.slack.com/outgoing-webhooks) to get request from slack.
 - [Custom Bot](https://api.slack.com/bot-users) to interact with slack.
+- [Sending Invitation](https://github.com/ErikKalkoken/slackApiDoc/blob/master/users.admin.invite.md) to existing user(CAUTION: this is unofficial API usage).
 
 Upper is easier. This plugin helps the connection between Slack and WordPress and you can concentrate on what you should do with slack.
 
@@ -81,9 +83,13 @@ If you have any request, please make issue on [github](https://github.com/hametu
 
 ## Changelog
 
+### 1.1.0
+
+- Add invitation request feature.
+
 ### 1.0.2
 
-- Add auto deploy
+- Add auto deploy.
 
 ### 1.0.0
 

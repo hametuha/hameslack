@@ -1,7 +1,8 @@
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: HameSlack\n"
-"POT-Creation-Date: 2017-01-19 18:39+0900\n"
+"POT-Creation-Date: 2017-12-07 17:32+0900\n"
 "PO-Revision-Date: 2017-01-19 18:39+0900\n"
 "Last-Translator: Takahashi Fumiki <takahashi.fumiki@hametuha.co.jp>\n"
 "Language-Team: Hametuha INC. <takahashi.fumiki@hametuha.co.jp>\n"
@@ -9,7 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.1\n"
+"X-Generator: Poedit 2.0.4\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
@@ -21,31 +22,73 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-1: vendor\n"
 
 #: functions/api.php:23
-#, fuzzy
 msgid "Payload URL is not set."
-msgstr "Item set"
+msgstr ""
 
 #: functions/api.php:77
 msgid "Token is required."
 msgstr ""
 
-#: functions/api.php:101
+#: functions/api.php:108
 msgid "Only GET or POST is allowed."
 msgstr ""
 
-#: functions/api.php:116
+#: functions/api.php:123
 msgid "Failed to parse response. something might be wrong."
 msgstr ""
 
-#: functions/api.php:168
+#: functions/api.php:180
 #, php-format
 msgid "Channel %s not found."
+msgstr ""
+
+#: functions/invititation.php:38
+msgid "API to invite user is not activated."
+msgstr ""
+
+#: functions/invititation.php:42
+msgid "Specified user doesn't exist."
 msgstr ""
 
 #: hameslack.php:31
 #, php-format
 msgid ""
 "[Hameslack] Sorry, this plugin requires PHP %s and over, but your PHP is %s."
+msgstr ""
+
+#: hooks/invite.php:10
+msgid "Slack User Name"
+msgstr ""
+
+#: hooks/invite.php:64
+msgid ""
+"Invitation mail has been sent! Please check mailbox and follow the "
+"instructions."
+msgstr ""
+
+#: hooks/invite.php:98
+msgid "Failed to send request. Pleaes try again later, or contact to admin."
+msgstr ""
+
+#: hooks/invite.php:101
+msgid "Request to Slack"
+msgstr ""
+
+#: hooks/invite.php:103
+msgid "Please request invitation to Slack by clicking the button below."
+msgstr ""
+
+#: hooks/invite.php:107
+#, php-format
+msgid "You have already requested at %s."
+msgstr ""
+
+#: hooks/invite.php:113
+msgid "Resend Invitation"
+msgstr ""
+
+#: hooks/invite.php:115
+msgid "Request Invitation"
 msgstr ""
 
 #: hooks/setting.php:15
@@ -108,59 +151,64 @@ msgid ""
 msgstr ""
 
 #: hooks/setting.php:90
-#, fuzzy
 msgid "Bot API Key"
-msgstr "公開キーと秘密キーは必須です。"
+msgstr ""
 
 #: hooks/setting.php:102
 #, php-format
 msgid "You can get bot api key <a href=\"%s\" target=\"_blank\">here</a>."
 msgstr ""
 
-#: hooks/setting.php:112
+#: hooks/setting.php:108
+msgid "Invite Token"
+msgstr ""
+
+#: hooks/setting.php:115
+#, php-format
+msgid "You can get Legacy API Token <a href=\"%s\" target=\"_blank\">here</a>."
+msgstr ""
+
+#: hooks/setting.php:125
 msgid "Test Connection"
 msgstr ""
 
-#: hooks/setting.php:119
-#, fuzzy
+#: hooks/setting.php:132
 msgid "Text to post"
-msgstr "Post Type"
+msgstr ""
 
-#: hooks/setting.php:125
+#: hooks/setting.php:138
 #, php-format
 msgid "Message will be sent to Slack <code>%s</code>. Try and check it."
 msgstr ""
 
-#: hooks/setting.php:135
+#: hooks/setting.php:148
 msgid "How to Use"
 msgstr ""
 
-#: hooks/setting.php:137
+#: hooks/setting.php:150
 msgid "This plugin does nothing by default. "
 msgstr ""
 
-#: hooks/setting.php:140
+#: hooks/setting.php:153
 #, php-format
 msgid ""
 "For more details and hooks, see our <a href=\"%s\" target=\"_blank"
 "\">documentation</a>."
 msgstr ""
 
-#: hooks/setting.php:159 hooks/setting.php:169
-#, fuzzy
+#: hooks/setting.php:173 hooks/setting.php:184
 msgid "Nonce is wrong access."
-msgstr "不正なアクセスです。"
+msgstr ""
 
-#: hooks/setting.php:172
-#, fuzzy
+#: hooks/setting.php:187
 msgid "Text is not set."
-msgstr "Item set"
+msgstr ""
 
-#: hooks/setting.php:182
+#: hooks/setting.php:197
 msgid "Bad request."
 msgstr ""
 
-#: hooks/setting.php:217
+#: hooks/setting.php:232
 #, php-format
 msgid "You should set up plugin <a href=\"%s\">here</a>."
 msgstr ""
