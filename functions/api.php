@@ -73,10 +73,13 @@ function hameslack_post( $content, $attachment = [], $channel = '' ) {
 function hameslack_bot_request( $method, $endpoint, $params = [] ) {
 	$method = strtolower( $method );
 	$endpoint = 'https://slack.com/api/' . trim( $endpoint, '/' );
-	if ( ! ( $token = hameslack_bot_key() ) ) {
-		return new WP_Error( 400, __( 'Token is required.', 'hameslack' ) );
+	if ( ! ( isset( $params['token'] ) && $params['token'] ) ) {
+		// Token doesn't exist.
+		if ( ! ( $token = hameslack_bot_key() ) ) {
+			return new WP_Error( 400, __( 'Token is required.', 'hameslack' ) );
+		}
+		$params['token'] = $token;
 	}
-	$params = array_merge( [ 'token' => $token ], $params );
 	$params_escaped = [];
 	foreach ( $params as $key => $value ) {
 		switch ( $key ) {

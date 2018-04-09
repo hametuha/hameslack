@@ -1,5 +1,14 @@
 <?php
 /**
+ * Hooks for invitaion.
+ *
+ * @param hameslack
+ * @since 1.1.0
+ */
+
+defined( 'ABSPATH' ) || die();
+
+/**
  * Add slack name.
  *
  * @param array $methods

@@ -2,10 +2,10 @@
 
 Tags: slack  
 Contributors: Takahashi_Fumiki  
-Tested up to: 4.9.0  
+Tested up to: 4.9.4  
 Requires at least: 4.7.0  
 Requires PHP: 5.4  
-Stable Tag: 1.1.0  
+Stable Tag: 1.1.1  
 License: GPLv3 or later  
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -46,9 +46,9 @@ For more details, please read our [Documentation](https://gianism.info/add-on/ha
 
 The simplest usage is *post to slack*. You can do like below:
 
-```
+<pre>
 do_action( 'hameslack', $text_to_post, $attachments, $channel );
-```
+</pre>
 
 Function is also available, but I prefer to use `do_action` to avoid annoying `if ( function_exists('func_name')) `.
 
@@ -82,6 +82,10 @@ If you have any request, please make issue on [github](https://github.com/hametu
 3. You can create Outgoing Webhooks as custom post type.
 
 ## Changelog
+
+### 1.1.1
+
+- Bugfix on REST API.
 
 ### 1.1.0
 
