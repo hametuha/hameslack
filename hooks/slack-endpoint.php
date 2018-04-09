@@ -1,6 +1,9 @@
 <?php
 /**
  * Endpoint hooks
+ *
+ * @package hameslack
+ * @since 1.0.0
  */
 
 defined( 'ABSPATH' ) or die();
