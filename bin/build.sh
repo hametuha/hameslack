@@ -2,10 +2,16 @@
 
 set -e
 
-#composer install --no-dev
+composer install --no-dev
 #npm install
 #npm start
 #rm -rf node_modules
+
+rm -rf .travis.yml
+rm .gitignore
+rm phpunit.xml.dist
+rm -rf tests
+rm -rf bin
 
 if [ $TRAVIS_TAG ]; then
     echo $TRAVIS_TAG

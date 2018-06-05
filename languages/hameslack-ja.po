@@ -1,35 +1,59 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-12-07 17:32+0900\n"
-"PO-Revision-Date: 2017-12-07 17:36+0900\n"
+"POT-Creation-Date: 2018-06-05 20:58+0900\n"
+"PO-Revision-Date: 2018-06-05 21:00+0900\n"
 "Last-Translator: Takahashi Fumiki <takahashi.fumiki@hametuha.co.jp>\n"
 "Language-Team: \n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 2.0.6\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/Hametuha/HameSlack/Service/Slack.php:161
+msgid "You denied authorization. Please try another method."
+msgstr "認証が拒否されました。別の方法をお試しください。"
+
+#: app/Hametuha/HameSlack/Service/Slack.php:217
+msgid "You must be logged in"
+msgstr ""
+
+#: app/Hametuha/HameSlack/Service/Slack.php:246
+#, php-format
+msgid "Sorry, but wrong access. Please go back to <a href=\"%s\">%s</a>."
+msgstr ""
+
+#: app/Hametuha/HameSlack/Service/Slack.php:263
+msgid ""
+"Code signing is wrong and your access is invalid. Please try again later."
+msgstr ""
+"コード認証が間違っているため、アクセスが無効です。もう一度やり直してくださ"
+"い。"
+
+#: app/Hametuha/HameSlack/Service/Slack.php:296
+msgid "Failed to get your information."
+msgstr "あなたの情報を取得できませんでした。"
 
 #: functions/api.php:23
 msgid "Payload URL is not set."
 msgstr "Payload URLが設定されていません。"
 
-#: functions/api.php:77
+#: functions/api.php:79
 msgid "Token is required."
 msgstr "トークンは必須です。"
 
-#: functions/api.php:108
+#: functions/api.php:111
 msgid "Only GET or POST is allowed."
 msgstr "GETまたはPOSTだけが利用できます。"
 
-#: functions/api.php:123
+#: functions/api.php:126
 msgid "Failed to parse response. something might be wrong."
 msgstr "レスポンスを解析できませんでした。なにかがおかしいようです。"
 
-#: functions/api.php:180
+#: functions/api.php:183
 #, php-format
 msgid "Channel %s not found."
 msgstr "チャンネル %s は見つかりませんでした。"
@@ -42,7 +66,7 @@ msgstr "ユーザー招待のAPIは有効化されていません。"
 msgid "Specified user doesn't exist."
 msgstr "指定されたユーザーは存在しません。"
 
-#: hameslack.php:31
+#: hameslack.php:42
 #, php-format
 msgid ""
 "[Hameslack] Sorry, this plugin requires PHP %s and over, but your PHP is %s."
@@ -50,11 +74,11 @@ msgstr ""
 "[HameSlack] 申し訳ございません、このプラグインはPHP%s以上が必須です。あなたの"
 "PHPは%sです。"
 
-#: hooks/invite.php:10
+#: hooks/invite.php:19
 msgid "Slack User Name"
 msgstr "Slackユーザー名"
 
-#: hooks/invite.php:64
+#: hooks/invite.php:73
 msgid ""
 "Invitation mail has been sent! Please check mailbox and follow the "
 "instructions."
@@ -62,30 +86,30 @@ msgstr ""
 "招待メールが送信されました！　メールの受信ボックスをチェックして、指示に従っ"
 "てください。"
 
-#: hooks/invite.php:98
+#: hooks/invite.php:107
 msgid "Failed to send request. Pleaes try again later, or contact to admin."
 msgstr ""
 "リクエストの送信に失敗しました。もう一度お試しになるか、管理者に問い合わせて"
 "ください。"
 
-#: hooks/invite.php:101
+#: hooks/invite.php:110
 msgid "Request to Slack"
 msgstr "Slackへの招待"
 
-#: hooks/invite.php:103
+#: hooks/invite.php:112
 msgid "Please request invitation to Slack by clicking the button below."
 msgstr "下のボタンを押してSlack への招待をリクエストしてください。"
 
-#: hooks/invite.php:107
+#: hooks/invite.php:116
 #, php-format
 msgid "You have already requested at %s."
 msgstr "あなたは %s にリクエスト済みです。"
 
-#: hooks/invite.php:113
+#: hooks/invite.php:122
 msgid "Resend Invitation"
 msgstr "招待メールを再送"
 
-#: hooks/invite.php:115
+#: hooks/invite.php:124
 msgid "Request Invitation"
 msgstr "招待をリクエスト"
 
@@ -227,31 +251,31 @@ msgstr "不正なリクエストです。"
 msgid "You should set up plugin <a href=\"%s\">here</a>."
 msgstr "<a href=\"%s\">こちら</a>からプラグインを設定してください。"
 
-#: hooks/slack-endpoint.php:16
+#: hooks/slack-endpoint.php:19
 msgid "Slack Endpoint"
 msgstr "Slack エンドポイント"
 
-#: hooks/slack-endpoint.php:57
+#: hooks/slack-endpoint.php:60
 msgid "Hash Key"
 msgstr "ハッシュキー"
 
-#: hooks/slack-endpoint.php:62
+#: hooks/slack-endpoint.php:65
 msgid "Generate automatically"
 msgstr "自動で生成"
 
-#: hooks/slack-endpoint.php:67 hooks/slack-endpoint.php:213
+#: hooks/slack-endpoint.php:70 hooks/slack-endpoint.php:216
 msgid "Endpoint"
 msgstr "エンドポイント"
 
-#: hooks/slack-endpoint.php:76
+#: hooks/slack-endpoint.php:79
 msgid "Endpoint URL will be issued when you publish post."
 msgstr "投稿を公開すると、エンドポイントURLが発行されます。"
 
-#: hooks/slack-endpoint.php:83
+#: hooks/slack-endpoint.php:86
 msgid "Token"
 msgstr "トークン"
 
-#: hooks/slack-endpoint.php:89
+#: hooks/slack-endpoint.php:92
 #, php-format
 msgid ""
 "You can get this token by registering <a href=\"%s\" target=\"_blank"
@@ -260,21 +284,121 @@ msgstr ""
 "<a href=\"%s\" target=\"_blank\">outgoing webhook</a>を登録することでトークン"
 "が取得できます。"
 
-#: hooks/slack-endpoint.php:95
+#: hooks/slack-endpoint.php:98
 msgid "Hash Control"
 msgstr "ハッシュ管理"
 
-#: hooks/slack-endpoint.php:100
+#: hooks/slack-endpoint.php:103
 msgid "Regenerate Hash"
 msgstr "ハッシュを再生成する"
 
-#: hooks/slack-endpoint.php:164
+#: hooks/slack-endpoint.php:167
 msgid "No API found. Token or URL is invalid."
 msgstr "APIが見つかりませんでした。トークンまたはURLが間違っています。"
 
-#: hooks/slack-endpoint.php:229
+#: hooks/slack-endpoint.php:232
 msgid "Not Generated"
 msgstr "生成されていません"
+
+#: templates/setting.php:12
+#, php-format
+msgid "Connect with %s"
+msgstr ""
+
+#: templates/setting.php:17
+#, php-format
+msgid ""
+"You have to create %1$s App <a target=\"_blank\" href=\"%2$s\">here</a> to "
+"get required information."
+msgstr ""
+
+#: templates/setting.php:21
+#, php-format
+msgid "See detail at <a href=\"%1$s\">%2$s</a>."
+msgstr ""
+
+#: templates/setting.php:21
+msgid "How to set up"
+msgstr ""
+
+#: templates/setting.php:27
+msgid "Client ID"
+msgstr ""
+
+#: templates/setting.php:32
+msgid "Client Secret"
+msgstr ""
+
+#: templates/setting.php:37
+msgid "Team ID"
+msgstr "チームID"
+
+#: templates/setting.php:43
+#, php-format
+msgid ""
+"Team ID is unique string(e.g. <code>TX43FFAC</code>) for your workspace. You "
+"can get it <a href=\"%s\" target=\"_blank\">here</a>."
+msgstr ""
+"チームIDはあなたのワークスペースを意味する一意の文字列（例・<code>TX43FFAC</"
+"code>）です。<a href=\"%s\" target=\"_blank\">こちら</a>で取得することができ"
+"ます。"
+
+#: templates/setting.php:50
+msgid "Redirect URI"
+msgstr ""
+
+#: templates/setting.php:56
+#, php-format
+msgid "Please set %1$s to %2$s on <a target=\"_blank\" href=\"%4$s\">%3$s</a>."
+msgstr ""
+
+#: templates/setting.php:64
+msgid "Please copy this URL."
+msgstr ""
+
+#: templates/setting.php:64
+msgid "Copy"
+msgstr ""
+
+#: templates/setup.php:7
+msgid "Slack login is connected with your workspace and app."
+msgstr "SlackログインはワークスペースとAppに紐づけられます。"
+
+#: templates/setup.php:10
+msgid "Create App"
+msgstr "Appを作成する"
+
+#: templates/setup.php:13
+#, php-format
+msgid ""
+"Go to <a href=\"%s\" target=\"_blank\">Your Apps</a> in your slack dashboard "
+"and create new app. Fill informations below:"
+msgstr ""
+"Slackダッシュボードの<a href=\"%s\" target=\"_blank\">Your Apps</a>に移動し、"
+"新しいアプリを作成してください。次の情報を入力しましょう。"
+
+#: templates/setup.php:21
+msgid "To which workspace you attach this app."
+msgstr "このappをどのワークスペースに紐づけるか。"
+
+#: templates/setup.php:25
+msgid ""
+"At least, <code>identity.basic</code> and <code>identity.email</code> are "
+"required."
+msgstr ""
+"少なくとも<code>identity.basic</code>と<code>identity.email</code>が必要で"
+"す。"
+
+#: templates/setup.php:37
+#, php-format
+msgid ""
+"Now come back to <a href=\"%1$s\">WP admin panel</a>, enter <code>Client ID</"
+"code> and <code>Client Secret</code>. You can get Team ID from <a href=\"%2$s"
+"\" target=\"_blank\">here</a>."
+msgstr ""
+"それでは<a href=\"%1$s\">WP管理画面</a>に戻り、<code>Client ID</code>と"
+"<code>Client Secret</code>を入力しましょう。Team IDは<a href=\"%2$s\" target="
+"\"_blank\">こちら</a>から入手できます。"
 
 #~ msgid "Flexible Usage"
 #~ msgstr "柔軟な使用方法"

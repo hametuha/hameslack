@@ -2,10 +2,10 @@
 
 Tags: slack  
 Contributors: Takahashi_Fumiki  
-Tested up to: 4.9.4  
+Tested up to: 4.9.6  
 Requires at least: 4.7.0  
 Requires PHP: 5.4  
-Stable Tag: 1.1.1  
+Stable Tag: 1.2.0  
 License: GPLv3 or later  
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -82,6 +82,10 @@ If you have any request, please make issue on [github](https://github.com/hametu
 3. You can create Outgoing Webhooks as custom post type.
 
 ## Changelog
+
+### 1.2.0
+
+- If [gianism](https://wordpress.org/plugins/gianism) is enabled, you can log in with Slack account.
 
 ### 1.1.1
 

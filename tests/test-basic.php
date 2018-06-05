@@ -9,6 +9,14 @@
  * Sample test case.
  */
 class HameSlack_Basic_Test extends WP_UnitTestCase {
+
+	/**
+	 * Class exists.
+	 */
+	public function test_auto_loader() {
+		//$this->assertTrue( class_exists( 'Hametuha\\HameSlack\\Service\\Slack' ) );
+	}
+
 	/**
 	 * Post
 	 */

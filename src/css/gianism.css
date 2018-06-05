@@ -1,0 +1,15 @@
+.lsf-slack{
+    width: 1em;
+    height: 1em;
+    background: url("../img/Slack_Mark_Web.png") center center no-repeat;
+    background-size: cover;
+}
+.wpg-button .lsf.lsf-slack{
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 5px;
+}
+#wpg-login.large .wpg-button .lsf.lsf-slack{
+    font-size: 30px;
+    margin-top: -16px;
+}
