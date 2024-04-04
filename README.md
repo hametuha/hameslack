@@ -2,11 +2,11 @@
 
 Tags: slack  
 Contributors: Takahashi_Fumiki  
-Tested up to: 4.9.6  
-Requires at least: 4.7.0  
-Requires PHP: 5.4  
-Stable Tag: 1.2.0  
-License: GPLv3 or later  
+Tested up to: 6.4  
+Requires at least: 5.9  
+Requires PHP: 7.2  
+Stable Tag: nightly  
+License: GPLv3 or later  んぎんx
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
 A Slack utility for WordPress.
@@ -14,11 +14,6 @@ A Slack utility for WordPress.
 ## Description
 
 This plugin integrates [Slack](https://slack.com) and WordPress.
-
-![Travis](https://travis-ci.org/hametuha/hameslack.svg)
-![Donwloads](https://img.shields.io/wordpress/plugin/dt/hameslack.svg)
-![Version](https://img.shields.io/wordpress/plugin/v/hameslack.svg)
-![Rating](https://img.shields.io/wordpress/plugin/r/hameslack.svg)
 
 ### Core Conception
 

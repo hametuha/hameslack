@@ -1,4 +1,6 @@
-.svn
-node_modules/
-vendor/
-readme.txt
+.svn/
+/node_modules/
+/vendor/
+/readme.txt
+/dist/
+composer.lock
