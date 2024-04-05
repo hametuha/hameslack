@@ -25,43 +25,59 @@ function hameslack_can_request_invitation( $user_id ) {
 }
 
 /**
- * Invite user
+ * A channel name to report intivation request.
  *
+ * @return string
+ */
+function hameslack_user_invitation_channel() {
+	return get_option( 'hameslack_invitation_channel', '' );
+}
+
+/**
+ * Invite user.
+ *
+ * Invitation API is now only valid for Enterprise Grid.
+ *
+ * @see https://api.slack.com/methods/admin.users.invite
  * @since 1.1.0
  * @param int $user_id
  * @return stdClass|WP_Error
  */
 function hameslack_user_invite( $user_id ) {
 	try {
-		$token = hameslack_invite_api_token();
-		if ( ! $token ) {
+		$channel = hameslack_user_invitation_channel();
+		if ( ! $channel ) {
 			throw new Exception( __( 'API to invite user is not activated.', 'hameslack' ), 401 );
 		}
 		$user = get_user_by( 'id', $user_id );
 		if ( ! $user ) {
 			throw new Exception( __( 'Specified user doesn\'t exist.', 'hameslack' ), 404 );
 		}
-		$invite_args = [
-			'token' => $token,
-			'email' => $user->user_email,
-			'first_name' => $user->first_name,
-			'last_name'  => $user->last_name,
+		// translators: %d is ID, %s is user_login.
+		$title       = sprintf( __( 'New user #%1$d %2$s request invitation', 'hametuha' ), $user->ID, $user->user_login );
+		$attachments = [
+			[
+				'fallback'    => $title,
+				'title'       => $title,
+				'title_link'  => admin_url( 'user-edit.php?user_id=' . $user->ID ),
+				'author_name' => $user->display_name,
+				'author_link' => admin_url( 'user-edit.php?user_id=' . $user->ID ),
+				'text'        => $user->user_email,
+				'color'       => 'good',
+			],
 		];
-		if ( hameslack_requested_time( $user_id ) ) {
-			$invite_args['resend'] = true;
-		}
 		/**
 		 * hameslack_invite_args
 		 *
-		 * @see https://github.com/ErikKalkoken/slackApiDoc/blob/master/users.admin.invite.md
-		 * @param array   $invite_args Associative array.
+		 * @param array   $attachments Associative array.
 		 * @param WP_User $user
 		 */
-		$invite_args = apply_filters( 'hameslack_invite_args', $invite_args, $user );
-		$response = hameslack_bot_request( 'POST', 'users.admin.invite', $invite_args );
+		$attachments = apply_filters( 'hameslack_invite_args', $attachments, $user );
+		$response    = hameslack_post( $title, $attachments, $channel );
 		if ( is_wp_error( $response ) ) {
 			return $response;
 		}
+		// phpcs:ignore WordPress.DateTime.CurrentTimeTimestamp.Requested
 		update_user_meta( $user_id, 'hameslack_last_requested', current_time( 'timestamp' ) );
 		return $response;
 	} catch ( Exception $e ) {

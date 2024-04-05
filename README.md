@@ -2,10 +2,10 @@
 
 Tags: slack  
 Contributors: Takahashi_Fumiki  
-Tested up to: 4.9.6  
-Requires at least: 4.7.0  
-Requires PHP: 5.4  
-Stable Tag: 1.2.0  
+Tested up to: 6.4  
+Requires at least: 5.9  
+Requires PHP: 7.2  
+Stable Tag: nightly  
 License: GPLv3 or later  
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -15,20 +15,13 @@ A Slack utility for WordPress.
 
 This plugin integrates [Slack](https://slack.com) and WordPress.
 
-![Travis](https://travis-ci.org/hametuha/hameslack.svg)
-![Donwloads](https://img.shields.io/wordpress/plugin/dt/hameslack.svg)
-![Version](https://img.shields.io/wordpress/plugin/v/hameslack.svg)
-![Rating](https://img.shields.io/wordpress/plugin/r/hameslack.svg)
-
 ### Core Conception
 
 By default, this plugin does nothing. It's true. 
-Slack has many API intergrations, but **hameslack** uses 3 of them.
+Slack has many API intergrations, but **hameslack** uses 2 of them.
 
 - [Incoming Webhook](https://api.slack.com/incoming-webhooks) to post to slack.
-- [Outgoing Webhook](https://api.slack.com/outgoing-webhooks) to get request from slack.
 - [Custom Bot](https://api.slack.com/bot-users) to interact with slack.
-- [Sending Invitation](https://github.com/ErikKalkoken/slackApiDoc/blob/master/users.admin.invite.md) to existing user(CAUTION: this is unofficial API usage).
 
 Upper is easier. This plugin helps the connection between Slack and WordPress and you can concentrate on what you should do with slack.
 
@@ -54,6 +47,10 @@ Function is also available, but I prefer to use `do_action` to avoid annoying `i
 
 Everything works fine if you set properly.
 
+### Deprecated API
+
+- **Sending Invitation** <code>deprecated at 2.0</code>:  this endpoint was unofficial and official one is only for Enterprise grid. Users now can send invitation reqeust from their profile page.
+- **Outgoind Webhook** <code>deprecated at 2.0</code>: Slack recommends Events API instead.
 
 ## Install
 
@@ -82,6 +79,11 @@ If you have any request, please make issue on [github](https://github.com/hametu
 3. You can create Outgoing Webhooks as custom post type.
 
 ## Changelog
+
+### 2.0.0
+
+- Remove invitation feature and users now can simple send message to specific channel to request invitation.
+- Bot is required.
 
 ### 1.2.0
 

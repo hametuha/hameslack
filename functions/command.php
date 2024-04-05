@@ -49,13 +49,14 @@ class HameSlackCommand extends WP_CLI_Command {
 	 */
 	public function history( $args, $assoc ) {
 		list( $channel ) = $args;
-		$args = wp_parse_args( $assoc, [
-			'count'  => 10,
+		$args            = wp_parse_args( $assoc, [
+			'count'     => 10,
 			'inclusive' => 0,
-			'unreads' => 0,
+			'unreads'   => 0,
 		] );
-		$latest = isset( $assoc['latest'] ) ? $assoc['latest'] : current_time( 'timestamp' );
-		$oldest = isset( $assoc['oldest'] ) ? $assoc['oldest'] : 0;
+		// phpcs:ignore WordPress.DateTime.CurrentTimeTimestamp.Requested
+		$latest   = isset( $assoc['latest'] ) ? $assoc['latest'] : current_time( 'timestamp' );
+		$oldest   = isset( $assoc['oldest'] ) ? $assoc['oldest'] : 0;
 		$messages = hameslack_channel_history( $channel, $oldest, $latest, $args );
 		if ( is_wp_error( $messages ) ) {
 			WP_CLI::error( $messages->get_error_message() );
@@ -66,7 +67,7 @@ class HameSlackCommand extends WP_CLI_Command {
 			$table->addRow( [
 				$message->user,
 				date_i18n( 'Y-m-d H:i', (int) $message->ts ),
-				mb_substr( $message->text, 0, 20, 'utf-8' ).'...',
+				mb_substr( $message->text, 0, 20, 'utf-8' ) . '...',
 			] );
 		}
 		$table->display();
@@ -110,5 +111,39 @@ class HameSlackCommand extends WP_CLI_Command {
 			WP_CLI::error( $channel->get_error_message() );
 		}
 		WP_CLI::success( sprintf( 'ID = %s', $channel ) );
+	}
+
+	/**
+	 * Invite user to slack.
+	 *
+	 * @synopsis <user>
+	 * @param array $args
+	 * @return void
+	 */
+	public function invite( $args ) {
+		list( $user_id ) = $args;
+		$user            = get_userdata( $user_id );
+		if ( ! $user ) {
+			// translators: %d is user ID.
+			WP_CLI::error( sprintf( __( 'User #%d not found.', 'hameslack' ), $user_id ) );
+		}
+		$table = new cli\Table();
+		$table->setHeaders( [ 'Property', 'Value' ] );
+		foreach ( [
+			[ 'ID', $user->ID ],
+			[ 'Name', $user->display_name ],
+			[ 'Mail', $user->user_email ],
+			[ 'Role', implode( ',', $user->roles ) ],
+			[ 'Registered', $user->user_registered ],
+		] as $row ) {
+			$table->addRow( $row );
+		}
+		$table->display();
+		WP_CLI::confirm( __( 'Are you sure to invite this user?', 'hametslack' ) );
+		$result = hameslack_user_invite( $user_id );
+		if ( is_wp_error( $result ) ) {
+			WP_CLI::error( $result->get_error_message() );
+		}
+		WP_CLI::success( __( 'Successfully send invitation to slack.', 'hameslack' ) );
 	}
 }

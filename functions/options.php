@@ -34,6 +34,7 @@ function hameslack_payload_url( $raw = false ) {
 /**
  * API token for invite
  *
+ * @deprecated since 2.0.0
  * @return string
  */
 function hameslack_invite_api_token() {
