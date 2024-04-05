@@ -10,9 +10,8 @@
 		"ga": false
 	},
 	"extends": [
-		"plugin:@wordpress/eslint-plugin/recommended"
+		"plugin:@wordpress/eslint-plugin/recommended-with-formatting"
 	],
-	"ignorePatterns": ["**/*/*.min.js", "**/*/js.cookie.js"],
 	"rules": {
 		"no-alert": "off",
 		"prettier/prettier": "off",

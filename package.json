@@ -15,7 +15,7 @@
 		"lint:js": "eslint src/js",
 		"lint:css": "stylelint src/scss",
 		"fix:js": "eslint --fix -c .eslintrc src/js",
-		"fix:css": "stylelint --fix src/sass"
+		"fix:css": "stylelint --fix src/scss"
 	},
 	"author": "Hametuha INC.",
 	"license": "LGPL-3.0-or-later",
