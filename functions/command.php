@@ -122,8 +122,9 @@ class HameSlackCommand extends WP_CLI_Command {
 	 */
 	public function invite( $args ) {
 		list( $user_id ) = $args;
-		$user = get_userdata( $user_id );
+		$user            = get_userdata( $user_id );
 		if ( ! $user ) {
+			// translators: %d is user ID.
 			WP_CLI::error( sprintf( __( 'User #%d not found.', 'hameslack' ), $user_id ) );
 		}
 		$table = new cli\Table();

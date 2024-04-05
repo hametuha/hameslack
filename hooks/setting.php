@@ -159,8 +159,8 @@ add_action( 'admin_init', function() {
 	add_settings_field( 'hameslack_bot_key', __( 'Bot Token', 'hameslack' ), function () {
 		?>
 		<input type="text" class="regular-text" style="width:100%; box-sizing: border-box;" name="hameslack_bot_key"
-			   value="<?php echo esc_attr( hameslack_bot_key( true ) ); ?>"
-			   placeholder="xoxb-numbers-longnubmer-allnumslike092abd23"/>
+			value="<?php echo esc_attr( hameslack_bot_key( true ) ); ?>"
+			placeholder="xoxb-numbers-longnubmer-allnumslike092abd23"/>
 		<?php if ( defined( 'SLACK_BOT_KEY' ) ) : ?>
 			<p>
 				<?php
@@ -182,8 +182,8 @@ add_action( 'admin_init', function() {
 	add_settings_field( 'hameslack_invitation_channel', __( 'Invitation Channel', 'hameslack' ), function () {
 		?>
 		<input type="text" class="regular-text" name="hameslack_invitation_channel"
-			   value="<?php echo esc_attr( get_option( 'hameslack_invitation_channel' ) ); ?>"
-			   placeholder="private-channel"/>
+			value="<?php echo esc_attr( get_option( 'hameslack_invitation_channel' ) ); ?>"
+			placeholder="private-channel"/>
 		<p class="description">
 			<?php
 			esc_html_e( 'If set, user can request an invitation and a bot will notify on this channel.', 'hameslack' );

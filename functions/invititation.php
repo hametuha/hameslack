@@ -54,16 +54,18 @@ function hameslack_user_invite( $user_id ) {
 			throw new Exception( __( 'Specified user doesn\'t exist.', 'hameslack' ), 404 );
 		}
 		// translators: %d is ID, %s is user_login.
-		$title       = sprintf( __( 'New user #%d %s request invitation', 'hametuha' ), $user->ID, $user->user_login );
-		$attachments = [ [
-			'fallback'    => $title,
-			'title'       => $title,
-			'title_link'  => admin_url( 'user-edit.php?user_id=' . $user->ID ),
-			'author_name' => $user->display_name,
-			'author_link' => admin_url( 'user-edit.php?user_id=' . $user->ID ),
-			'text'        => $user->user_email,
-			'color'       => 'good',
-		] ];
+		$title       = sprintf( __( 'New user #%1$d %2$s request invitation', 'hametuha' ), $user->ID, $user->user_login );
+		$attachments = [
+			[
+				'fallback'    => $title,
+				'title'       => $title,
+				'title_link'  => admin_url( 'user-edit.php?user_id=' . $user->ID ),
+				'author_name' => $user->display_name,
+				'author_link' => admin_url( 'user-edit.php?user_id=' . $user->ID ),
+				'text'        => $user->user_email,
+				'color'       => 'good',
+			],
+		];
 		/**
 		 * hameslack_invite_args
 		 *
