@@ -89,12 +89,12 @@ add_action( 'show_user_profile', function ( $user ) {
 	}
 	$show_invitation = hameslack_can_request_invitation( $user->ID );
 	/**
-	 * hameslack_show_invitation_compoent
+	 * hameslack_show_invitation_component
 	 *
 	 * @param bool $show_invitation
 	 * @param WP_User $user
 	 */
-	$show_invitation = apply_filters( 'hameslack_show_invitation_compoent', $show_invitation, $user );
+	$show_invitation = apply_filters( 'hameslack_show_invitation_component', $show_invitation, $user );
 	if ( ! $show_invitation ) {
 		// Do nothing.
 		return;

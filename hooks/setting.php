@@ -48,102 +48,12 @@ add_action( 'admin_menu', function () {
 			}
 			?>
 
-			<form action="<?php echo admin_url( 'options-general.php?page=hameslack&hameslack_action=option' ); ?>"
-				method="post">
-				<?php wp_nonce_field( 'hameslack_option' ); ?>
-				<table class="form-table">
-					<tr>
-						<th>
-							<label for="slack_url"><?php _e( 'Payload URL', 'hameslack' ); ?></label>
-						</th>
-						<td>
-							<input type="url" class="regular-text" name="slack_url" id="slack_url"
-								value="<?php echo esc_attr( hameslack_payload_url( true ) ); ?>"
-								placeholder="https://hooks.slack.com/services/long-key/another-key/very-long-key"/>
-							<?php if ( defined( 'SLACK_ENDPOINT' ) ) : ?>
-								<p>
-									<?php
-									// translators: %1$s is constant name, %2$s is constant value.
-									printf( __( 'You defined constant <strong>%1$s</strong>, so <code>%2$s</code> will be used instead.', 'hameslack' ), 'SLACK_ENDPOINT', SLACK_ENDPOINT );
-									?>
-								</p>
-							<?php endif; ?>
-							<p class="description">
-								<?php
-								// translators: %s is link to payload url.
-								printf( __( 'You can get payload URL for Webhooks <a href="%s" target="_blank">here</a>.', 'hameslack' ), 'https://api.slack.com/incoming-webhooks' );
-								?>
-							</p>
-						</td>
-					</tr>
-					<tr>
-						<th>
-							<label for="slack_outgoing"><?php _e( 'Outgoing Webhook', 'hameslack' ); ?></label>
-						</th>
-						<td>
-							<label>
-								<input type="checkbox" value="1" name="slack_outgoing"
-									id="slack_outgoing" <?php checked( hameslack_use_outgoing( true ) ); ?> />
-								<?php _e( 'Use outgoing web hook', 'hameslack' ); ?>
-							</label>
-							<?php if ( defined( 'SLACK_USE_OUTGOING' ) ) : ?>
-								<p>
-									<?php
-									// translators: %s is constant value.
-									printf( __( 'You defined constant <strong>SLACK_USE_OUTGOING</strong>, so always %s.', 'hameslack' ), SLACK_USE_OUTGOING ? 'ON' : 'OFF' );
-									?>
-								</p>
-							<?php endif; ?>
-							<p class="description">
-								<?php
-								// translators: %s is link to outgoing webhook.
-								printf( __( 'If you enable this, <a href="%s" target="_blank">outgoing webhook</a> is enabled.', 'hameslack' ), 'https://api.slack.com/outgoing-webhooks' );
-								?>
-							</p>
-						</td>
-					</tr>
-					<tr>
-						<th>
-							<label for="slack_bot"><?php _e( 'Bot API Key', 'hameslack' ); ?></label>
-						</th>
-						<td>
-							<input type="text" class="regular-text" name="slack_bot" id="slack_bot"
-								value="<?php echo esc_attr( hameslack_bot_key( true ) ); ?>"
-								placeholder="abcdefghijklmnoPqrstuvwxyz"/>
-							<?php if ( defined( 'SLACK_BOT_KEY' ) ) : ?>
-								<p>
-									<?php
-									// translators: %1$s is constant name, %2$s is constant value.
-									printf( __( 'You defined constant <strong>%1$s</strong>, so <code>%2$s</code> will be used instead.', 'hameslack' ), 'SLACK_BOT_KEY', SLACK_BOT_KEY );
-									?>
-								</p>
-							<?php endif; ?>
-							<p class="description">
-								<?php
-								// translators: %s is link to bot api key.
-								printf( __( 'You can get bot api key <a href="%s" target="_blank">here</a>.', 'hameslack' ), 'https://api.slack.com/bot-users' );
-								?>
-							</p>
-						</td>
-					</tr>
-					<tr>
-						<th>
-							<label for="hameslack_invite_api_token"><?php _e( 'Invite Token', 'hameslack' ); ?></label>
-						</th>
-						<td>
-							<input type="text" class="regular-text" name="hameslack_invite_api_token" id="hameslack_invite_api_token"
-								value="<?php echo esc_attr( hameslack_invite_api_token() ); ?>"
-								placeholder="ex: xoxp-asd013fsef0..."/>
-							<p class="description">
-								<?php
-								// translators: %s is link to bot api key.
-								printf( __( 'You can get Legacy API Token <a href="%s" target="_blank">here</a>.', 'hameslack' ), 'https://api.slack.com/custom-integrations/legacy-tokens' );
-								?>
-							</p>
-						</td>
-					</tr>
-				</table>
-				<?php submit_button(); ?>
+			<form method="POST" action="<?php echo admin_url( 'options.php' ); ?>">
+				<?php
+				settings_fields( 'hameslack' );
+				do_settings_sections( 'hameslack' );
+				submit_button();
+				?>
 			</form>
 
 			<hr/>
@@ -190,6 +100,87 @@ add_action( 'admin_menu', function () {
 } );
 
 /**
+ * Register settings API.
+ */
+add_action( 'admin_init', function() {
+	add_settings_section( 'hameslack-credentials', __( 'Slack Credentials', 'hameslack' ), function () {
+		printf( '<p class="description">%s</p>', __( 'Credential information for Slack Bot.', 'hameslack' ) );
+	}, 'hameslack' );
+	// Register settings.
+	add_settings_field( 'hameslack_payload_url', __( 'Payload URL', 'hameslack' ), function () {
+		?>
+		<input type="url" class="regular-text" style="width:100%; box-sizing: border-box;" name="hameslack_payload_url"
+			value="<?php echo esc_attr( hameslack_payload_url( true ) ); ?>"
+			placeholder="https://hooks.slack.com/services/long-key/another-key/very-long-key"/>
+		<?php if ( defined( 'SLACK_ENDPOINT' ) ) : ?>
+			<p>
+				<?php
+				// translators: %1$s is constant name, %2$s is constant value.
+				printf( __( 'You defined constant <strong>%1$s</strong>, so <code>%2$s</code> will be used instead.', 'hameslack' ), 'SLACK_ENDPOINT', SLACK_ENDPOINT );
+				?>
+			</p>
+		<?php endif; ?>
+		<p class="description">
+			<?php
+			// translators: %s is link to payload url.
+			printf( __( 'You can get payload URL for Webhooks <a href="%s" target="_blank">here</a>.', 'hameslack' ), 'https://api.slack.com/incoming-webhooks' );
+			?>
+		</p>
+		<?php
+	}, 'hameslack', 'hameslack-credentials' );
+	register_setting( 'hameslack', 'hameslack_payload_url' );
+
+	add_settings_field( 'hameslack_outgoing', __( 'Outgoing Webhook', 'hameslack' ), function () {
+		?>
+		<label>
+			<input type="checkbox" value="1" name="hameslack_outgoing"
+				id="hameslack_outgoing" <?php checked( hameslack_use_outgoing( true ), '1' ); ?> />
+			<?php esc_html_e( 'Use outgoing web hook', 'hameslack' ); ?>
+		</label>
+		<?php if ( defined( 'SLACK_USE_OUTGOING' ) ) : ?>
+			<p>
+				<?php
+				// translators: %s is constant value.
+				printf( __( 'You defined constant <strong>SLACK_USE_OUTGOING</strong>, so always %s.', 'hameslack' ), SLACK_USE_OUTGOING ? 'ON' : 'OFF' );
+				?>
+			</p>
+		<?php endif; ?>
+		<p class="description">
+			<strong>NOTICE: </strong>
+			<?php
+			// translators: %s is link to outgoing webhook.
+			printf( __( 'This feature will be deprecated, beacause Slack recommends using <a href="%s" target="_blank">Events API</a>.', 'hameslack' ), 'https://api.slack.com/apis/connections/events-api' );
+			?>
+		</p>
+		<?php
+	}, 'hameslack', 'hameslack-credentials' );
+	register_setting( 'hameslack', 'hameslack_outgoing' );
+
+	add_settings_field( 'hameslack_bot_key', __( 'Bot Token', 'hameslack' ), function () {
+		?>
+		<input type="text" class="regular-text" style="width:100%; box-sizing: border-box;" name="hameslack_bot_key"
+			   value="<?php echo esc_attr( hameslack_bot_key( true ) ); ?>"
+			   placeholder="xoxb-numbers-longnubmer-allnumslike092abd23"/>
+		<?php if ( defined( 'SLACK_BOT_KEY' ) ) : ?>
+			<p>
+				<?php
+				// translators: %1$s is constant name, %2$s is constant value.
+				printf( __( 'You defined constant <strong>%1$s</strong>, so <code>%2$s</code> will be used instead.', 'hameslack' ), 'SLACK_BOT_KEY', SLACK_BOT_KEY );
+				?>
+			</p>
+		<?php endif; ?>
+		<p class="description">
+			<?php
+			// translators: %s is link to bot api key.
+			printf( __( 'You can get bot token by creating <a href="%s" target="_blank">a new app</a> and install it to your workspace.', 'hameslack' ), 'https://api.slack.com/apps' );
+			?>
+		</p>
+		<?php
+	}, 'hameslack', 'hameslack-credentials' );
+	register_setting( 'hameslack', 'hameslack_bot_key' );
+}  );
+
+/**
  * Save setting and test connection
  */
 add_action( 'admin_init', function () {
@@ -199,17 +190,6 @@ add_action( 'admin_init', function () {
 	}
 	try {
 		switch ( $_GET['hameslack_action'] ) {
-			case 'option':
-				if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'hameslack_option' ) ) {
-					throw new Exception( __( 'Nonce is wrong access.', 'hameslack' ), 401 );
-				}
-				update_option( 'hameslack_payload_url', $_POST['slack_url'] );
-				update_option( 'hameslack_outgoing', isset( $_POST['slack_outgoing'] ) && $_POST['slack_outgoing'] );
-				update_option( 'hameslack_bot_key', $_POST['slack_bot'] );
-				update_option( 'hameslack_invite_api_token', $_POST['hameslack_invite_api_token'] );
-				wp_safe_redirect( admin_url( 'options-general.php?page=hameslack&hameslack_msg=updated' ) );
-				exit;
-				break;
 			case 'test':
 				if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'hameslack_test' ) ) {
 					throw new Exception( __( 'Nonce is wrong access.', 'hameslack' ), 401 );

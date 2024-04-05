@@ -112,4 +112,37 @@ class HameSlackCommand extends WP_CLI_Command {
 		}
 		WP_CLI::success( sprintf( 'ID = %s', $channel ) );
 	}
+
+	/**
+	 * Invite user to slack.
+	 *
+	 * @synopsis <user>
+	 * @param array $args
+	 * @return void
+	 */
+	public function invite( $args ) {
+		list( $user_id ) = $args;
+		$user = get_userdata( $user_id );
+		if ( ! $user ) {
+			WP_CLI::error( sprintf( __( 'User #%d not found.', 'hameslack' ), $user_id ) );
+		}
+		$table = new cli\Table();
+		$table->setHeaders( [ 'Property', 'Value' ] );
+		foreach ( [
+			[ 'ID', $user->ID ],
+			[ 'Name', $user->display_name ],
+			[ 'Mail', $user->user_email ],
+			[ 'Role', implode( ',', $user->roles ) ],
+			[ 'Registered', $user->user_registered ],
+		] as $row ) {
+			$table->addRow( $row );
+		}
+		$table->display();
+		WP_CLI::confirm( __( 'Are you sure to invite this user?', 'hametslack' ) );
+		$result = hameslack_user_invite( $user_id );
+		if ( is_wp_error( $result ) ) {
+			WP_CLI::error( $result->get_error_message() );
+		}
+		print_r( $result );
+	}
 }

@@ -129,6 +129,7 @@ function hameslack_bot_request( $method, $endpoint, $params = [] ) {
 		] );
 	}
 	if ( ! $response->ok ) {
+		print_r( $response );
 		return new WP_Error( 500, $response->error, [
 			'status' => 500,
 		] );

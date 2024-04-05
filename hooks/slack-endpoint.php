@@ -139,8 +139,8 @@ add_action( 'save_post', function ( $post_id, $post ) {
 add_action( 'rest_api_init', function () {
 	register_rest_route( 'hameslack/v1', '/outgoing/(?P<hash>[^/]+)/?', [
 		[
-			'methods'  => 'POST',
-			'args'     => [
+			'methods'             => 'POST',
+			'args'                => [
 				'hash'  => [
 					'required' => true,
 				],
@@ -148,7 +148,8 @@ add_action( 'rest_api_init', function () {
 					'required' => true,
 				],
 			],
-			'callback' => function ( $params ) {
+			'permission_callback' => '__return_true',
+			'callback'            => function ( $params ) {
 				$posts = get_posts( [
 					'post_type'        => 'slack-endpoint',
 					'post_status'      => 'publish',

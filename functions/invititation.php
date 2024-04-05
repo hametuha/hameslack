@@ -25,8 +25,11 @@ function hameslack_can_request_invitation( $user_id ) {
 }
 
 /**
- * Invite user
+ * Invite user.
  *
+ * Invitation API is now only valid for Enterprise Grid.
+ *
+ * @see https://api.slack.com/methods/admin.users.invite
  * @since 1.1.0
  * @param int $user_id
  * @return stdClass|WP_Error
