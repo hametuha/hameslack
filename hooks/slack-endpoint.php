@@ -9,18 +9,18 @@
 defined( 'ABSPATH' ) or die();
 
 if ( defined( 'WP_CLI' ) ) {
-    WP_CLI::add_command( 'hameslack', 'HameSlackCommand' );
+	WP_CLI::add_command( 'hameslack', 'HameSlackCommand' );
 }
 
 // Register post type
 add_action( 'init', function () {
 	if ( hameslack_use_outgoing() ) {
 		$args = [
-			'label'    => __( 'Slack Endpoint', 'hameslack' ),
-			'public'   => false,
-			'show_ui'  => true,
-            'menu_icon' => 'dashicons-share-alt',
-			'supports' => [ 'title', 'excerpt', 'slug', 'author' ],
+			'label'     => __( 'Slack Endpoint', 'hameslack' ),
+			'public'    => false,
+			'show_ui'   => true,
+			'menu_icon' => 'dashicons-share-alt',
+			'supports'  => [ 'title', 'excerpt', 'slug', 'author' ],
 		];
 		/**
 		 * hameslack_post_type_args
@@ -48,63 +48,66 @@ add_action( 'edit_form_after_title', function ( $post ) {
 	wp_nonce_field( 'hameslack_hash', '_hameslacknonce', false );
 	$hash = get_post_meta( $post->ID, '_hameslack_hash', true );
 	?>
-    <style type="text/css">
-        .hameslack-table input[type=text] {
-            box-sizing: border-box;
-            width: 100%;
-        }
-    </style>
-    <table class="form-table hameslack-table">
-        <tr>
-            <th>
-                <label for="hameslack_hash"><?php _e( 'Hash Key', 'hameslack' ) ?></label>
-            </th>
-            <td>
-                <input type="text" class="regular-text" name="hameslack_hash" id="hameslack_hash" readonly
-                       value="<?php echo esc_attr( $hash ) ?>"
-                       placeholder="<?php esc_attr_e( 'Generate automatically', 'hameslack' ) ?>"/>
-            </td>
-        </tr>
-        <tr>
-            <th>
-                <label for="hameslack_endpoint"><?php _e( 'Endpoint', 'hameslack' ) ?></label>
-            </th>
-            <td>
+	<style type="text/css">
+		.hameslack-table input[type=text] {
+			box-sizing: border-box;
+			width: 100%;
+		}
+	</style>
+	<table class="form-table hameslack-table">
+		<tr>
+			<th>
+				<label for="hameslack_hash"><?php _e( 'Hash Key', 'hameslack' ); ?></label>
+			</th>
+			<td>
+				<input type="text" class="regular-text" name="hameslack_hash" id="hameslack_hash" readonly
+					value="<?php echo esc_attr( $hash ); ?>"
+					placeholder="<?php esc_attr_e( 'Generate automatically', 'hameslack' ); ?>"/>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<label for="hameslack_endpoint"><?php _e( 'Endpoint', 'hameslack' ); ?></label>
+			</th>
+			<td>
 				<?php if ( $hash ) : ?>
-                    <input type="text" class="regular-text" id="hameslack_endpoint" readonly
-                           value="<?php echo esc_attr( rest_url( "hameslack/v1/outgoing/{$hash}" ) ) ?>"/>
+					<input type="text" class="regular-text" id="hameslack_endpoint" readonly
+						value="<?php echo esc_attr( rest_url( "hameslack/v1/outgoing/{$hash}" ) ); ?>"/>
 				<?php else : ?>
-                    <p class="description">
-                        <span class="dashicons dashicons-dismiss"></span>
-						<?php _e( 'Endpoint URL will be issued when you publish post.', 'hameslack' ) ?>
-                    </p>
+					<p class="description">
+						<span class="dashicons dashicons-dismiss"></span>
+						<?php _e( 'Endpoint URL will be issued when you publish post.', 'hameslack' ); ?>
+					</p>
 				<?php endif; ?>
-            </td>
-        </tr>
-        <tr>
-            <th>
-                <label for="hameslack_token"><?php _e( 'Token', 'hameslack' ) ?></label>
-            </th>
-            <td>
-                <input type="text" class="regular-text" name="hameslack_token" id="hameslack_token"
-                       value="<?php echo esc_attr( get_post_meta( $post->ID, '_hameslack_token', true ) ) ?>"/>
-                <p class="description">
-					<?php printf( __( 'You can get this token by registering <a href="%s" target="_blank">outgoing webhook</a>.', 'hameslack' ), 'https://api.slack.com/outgoing-webhooks' ) ?>
-                </p>
-            </td>
-        </tr>
-        <tr>
-            <th>
-                <label for="hameslack_regen"><?php _e( 'Hash Control', 'hameslack' ) ?></label>
-            </th>
-            <td>
-                <label>
-                    <input type="checkbox" name="hameslack_regen" id="hameslack_regen" value="1"/>
-					<?php _e( 'Regenerate Hash', 'hameslack' ) ?>
-                </label>
-            </td>
-        </tr>
-    </table>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<label for="hameslack_token"><?php _e( 'Token', 'hameslack' ); ?></label>
+			</th>
+			<td>
+				<input type="text" class="regular-text" name="hameslack_token" id="hameslack_token"
+					value="<?php echo esc_attr( get_post_meta( $post->ID, '_hameslack_token', true ) ); ?>"/>
+				<p class="description">
+					<?php
+					// translators: %s is link to outgoing webhook.
+					printf( __( 'You can get this token by registering <a href="%s" target="_blank">outgoing webhook</a>.', 'hameslack' ), 'https://api.slack.com/outgoing-webhooks' );
+					?>
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<label for="hameslack_regen"><?php _e( 'Hash Control', 'hameslack' ); ?></label>
+			</th>
+			<td>
+				<label>
+					<input type="checkbox" name="hameslack_regen" id="hameslack_regen" value="1"/>
+					<?php _e( 'Regenerate Hash', 'hameslack' ); ?>
+				</label>
+			</td>
+		</tr>
+	</table>
 	<?php
 } );
 
@@ -212,7 +215,7 @@ add_action( 'rest_api_init', function () {
 add_filter( 'manage_slack-endpoint_posts_columns', function ( $columns ) {
 	$new_column = [];
 	foreach ( $columns as $col => $label ) {
-		if ( 'author' == $col ) {
+		if ( 'author' === $col ) {
 			$new_column['endpoint'] = __( 'Endpoint', 'hameslack' );
 		}
 		$new_column[ $col ] = $label;

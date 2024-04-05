@@ -49,13 +49,14 @@ class HameSlackCommand extends WP_CLI_Command {
 	 */
 	public function history( $args, $assoc ) {
 		list( $channel ) = $args;
-		$args = wp_parse_args( $assoc, [
-			'count'  => 10,
+		$args            = wp_parse_args( $assoc, [
+			'count'     => 10,
 			'inclusive' => 0,
-			'unreads' => 0,
+			'unreads'   => 0,
 		] );
-		$latest = isset( $assoc['latest'] ) ? $assoc['latest'] : current_time( 'timestamp' );
-		$oldest = isset( $assoc['oldest'] ) ? $assoc['oldest'] : 0;
+		// phpcs:ignore WordPress.DateTime.CurrentTimeTimestamp.Requested
+		$latest   = isset( $assoc['latest'] ) ? $assoc['latest'] : current_time( 'timestamp' );
+		$oldest   = isset( $assoc['oldest'] ) ? $assoc['oldest'] : 0;
 		$messages = hameslack_channel_history( $channel, $oldest, $latest, $args );
 		if ( is_wp_error( $messages ) ) {
 			WP_CLI::error( $messages->get_error_message() );
@@ -66,7 +67,7 @@ class HameSlackCommand extends WP_CLI_Command {
 			$table->addRow( [
 				$message->user,
 				date_i18n( 'Y-m-d H:i', (int) $message->ts ),
-				mb_substr( $message->text, 0, 20, 'utf-8' ).'...',
+				mb_substr( $message->text, 0, 20, 'utf-8' ) . '...',
 			] );
 		}
 		$table->display();

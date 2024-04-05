@@ -60,10 +60,10 @@ class Slack extends AbstractService {
 	 * @var array
 	 */
 	protected $option_keys = [
-		'slack_enabled' => false,
-		'slack_client_id' => '',
+		'slack_enabled'       => false,
+		'slack_client_id'     => '',
 		'slack_client_secret' => '',
-		'slack_team_id' => '',
+		'slack_team_id'       => '',
 	];
 
 	/**
@@ -75,7 +75,7 @@ class Slack extends AbstractService {
 		parent::__construct( $argument );
 		// Filter rewrite name
 		add_filter( 'gianism_filter_service_prefix', function( $prefix ) {
-			if ( 'slack-auth' == $prefix ) {
+			if ( 'slack-auth' === $prefix ) {
 				$prefix = 'slack';
 			}
 			return $prefix;
@@ -167,8 +167,8 @@ class Slack extends AbstractService {
 		switch ( $action ) {
 			case 'login':
 				try {
-					$token      = $this->get_user_token( $code, $state, $saved_state );
-					$user_info  = $this->get_user_info( $token );
+					$token     = $this->get_user_token( $code, $state, $saved_state );
+					$user_info = $this->get_user_info( $token );
 					$user_id   = $this->get_meta_owner( $this->umeta_id, $user_info->id );
 					if ( ! $user_id ) {
 						$this->test_user_can_register();
@@ -217,8 +217,8 @@ class Slack extends AbstractService {
 						throw new \Exception( $this->_( 'You must be logged in' ) );
 					}
 					// Get user info
-					$token      = $this->get_user_token( $code, $state, $saved_state );
-					$user_info  = $this->get_user_info( $token );
+					$token     = $this->get_user_token( $code, $state, $saved_state );
+					$user_info = $this->get_user_info( $token );
 					$owner     = $this->get_meta_owner( $this->umeta_id, $user_info->id );
 					if ( $owner ) {
 						throw new \Exception( $this->duplicate_account_string() );
@@ -243,7 +243,8 @@ class Slack extends AbstractService {
 				do_action( 'gianism_extra_action', $this->service_name, $action, [
 					'redirect_to' => $redirect_url,
 				] );
-				$this->input->wp_die( sprintf( __( 'Sorry, but wrong access. Please go back to <a href="%s">%s</a>.', 'wp-gianism' ), home_url( '/' ), get_bloginfo( 'name' ) ), 500, false );
+				// translators: %1$s is URL, %2$s is service name.
+				$this->input->wp_die( sprintf( __( 'Sorry, but wrong access. Please go back to <a href="%1$s">%2$s</a>.', 'wp-gianism' ), home_url( '/' ), get_bloginfo( 'name' ) ), 500, false );
 				break;
 		}
 	}
@@ -262,11 +263,11 @@ class Slack extends AbstractService {
 		if ( $state !== $saved_state ) {
 			throw new \Exception( __( 'Code signing is wrong and your access is invalid. Please try again later.', 'hameslack' ), 401 );
 		}
-		$url = add_query_arg( [
-			'client_id' => $this->slack_client_id,
+		$url      = add_query_arg( [
+			'client_id'     => $this->slack_client_id,
 			'client_secret' => $this->slack_client_secret,
-			'code' => $code,
-			'redirect_uri' => home_url( '/slack-auth/' ),
+			'code'          => $code,
+			'redirect_uri'  => home_url( '/slack-auth/' ),
 		], 'https://slack.com/api/oauth.access' );
 		$response = wp_remote_get( $url );
 		if ( is_wp_error( $response ) ) {

@@ -26,9 +26,9 @@ require dirname( __FILE__ ) . '/vendor/autoload.php';
 function hameslack_initialize() {
 	// Get version number
 	$info = get_file_data( __FILE__, array(
-		'version' => 'Version',
+		'version'     => 'Version',
 		'php_version' => 'PHP Version',
-		'domain' => 'Text Domain',
+		'domain'      => 'Text Domain',
 	) );
 
 	load_plugin_textdomain( $info['domain'], true, basename( __DIR__ ) . '/languages' );
@@ -40,13 +40,13 @@ function hameslack_initialize() {
 	require dirname( __FILE__ ) . '/vendor/autoload.php';
 	// Load functions
 	foreach ( array( 'functions', 'hooks' ) as $dir_name ) {
-		$dir = __DIR__.'/'.$dir_name.'/';
+		$dir = __DIR__ . '/' . $dir_name . '/';
 		if ( ! is_dir( $dir ) ) {
 			continue;
 		}
 		foreach ( scandir( $dir ) as $file ) {
 			if ( preg_match( '#^[^.](.*)\.php$#u', $file ) ) {
-				require $dir.$file;
+				require $dir . $file;
 			}
 		}
 	}

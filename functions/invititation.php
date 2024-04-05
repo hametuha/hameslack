@@ -42,8 +42,8 @@ function hameslack_user_invite( $user_id ) {
 			throw new Exception( __( 'Specified user doesn\'t exist.', 'hameslack' ), 404 );
 		}
 		$invite_args = [
-			'token' => $token,
-			'email' => $user->user_email,
+			'token'      => $token,
+			'email'      => $user->user_email,
 			'first_name' => $user->first_name,
 			'last_name'  => $user->last_name,
 		];
@@ -58,10 +58,11 @@ function hameslack_user_invite( $user_id ) {
 		 * @param WP_User $user
 		 */
 		$invite_args = apply_filters( 'hameslack_invite_args', $invite_args, $user );
-		$response = hameslack_bot_request( 'POST', 'users.admin.invite', $invite_args );
+		$response    = hameslack_bot_request( 'POST', 'users.admin.invite', $invite_args );
 		if ( is_wp_error( $response ) ) {
 			return $response;
 		}
+		// phpcs:ignore WordPress.DateTime.CurrentTimeTimestamp.Requested
 		update_user_meta( $user_id, 'hameslack_last_requested', current_time( 'timestamp' ) );
 		return $response;
 	} catch ( Exception $e ) {

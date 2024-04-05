@@ -28,7 +28,7 @@ function hameslack_post( $content, $attachment = [], $channel = '' ) {
 	$payload = [
 		'channel' => $channel,
 	];
-	$debug = hameslack_is_debug();
+	$debug   = hameslack_is_debug();
 	if ( hameslack_is_debug() ) {
 		$content = "[Debug] {$content}";
 	}
@@ -71,11 +71,12 @@ function hameslack_post( $content, $attachment = [], $channel = '' ) {
  * @return object|WP_Error
  */
 function hameslack_bot_request( $method, $endpoint, $params = [] ) {
-	$method = strtolower( $method );
+	$method   = strtolower( $method );
 	$endpoint = 'https://slack.com/api/' . trim( $endpoint, '/' );
 	if ( ! ( isset( $params['token'] ) && $params['token'] ) ) {
 		// Token doesn't exist.
-		if ( ! ( $token = hameslack_bot_key() ) ) {
+		$token = hameslack_bot_key();
+		if ( ! $token ) {
 			return new WP_Error( 400, __( 'Token is required.', 'hameslack' ) );
 		}
 		$params['token'] = $token;
@@ -103,8 +104,8 @@ function hameslack_bot_request( $method, $endpoint, $params = [] ) {
 			$options[ CURLOPT_URL ] = add_query_arg( $params_escaped, $endpoint );
 			break;
 		case 'post':
-			$options[ CURLOPT_URL ] = $endpoint;
-			$options[ CURLOPT_POST ] = true;
+			$options[ CURLOPT_URL ]        = $endpoint;
+			$options[ CURLOPT_POST ]       = true;
 			$options[ CURLOPT_POSTFIELDS ] = $params_escaped;
 			break;
 		default:
@@ -151,7 +152,7 @@ function hameslack_members( $names = [] ) {
 	}
 	if ( $names ) {
 		$users = array_filter( $response->members, function( $member ) use ( $names ) {
-			return false !== array_search( $member->name, $names );
+			return in_array( $member->name, $names, true );
 		} );
 	} else {
 		$users = $response->members;
@@ -170,12 +171,12 @@ function hameslack_members( $names = [] ) {
  */
 function hameslack_channel_id( $channel_label ) {
 	$channel_label = trim( $channel_label, '#' );
-	$response = hameslack_bot_request( 'GET', 'channels.list' );
+	$response      = hameslack_bot_request( 'GET', 'channels.list' );
 	if ( is_wp_error( $response ) ) {
 		return $response;
 	}
 	foreach ( $response->channels as $channel ) {
-		if ( $channel_label == $channel->name ) {
+		if ( $channel_label === $channel->name ) {
 			return $channel->id;
 		}
 	}
@@ -204,14 +205,15 @@ function hameslack_channel_history( $channel, $oldest = -1, $latest = -1, $args 
 		$oldest = 0;
 	}
 	if ( 0 > $latest ) {
+		// phpcs:ignore WordPress.DateTime.CurrentTimeTimestamp.Requested
 		$latest = current_time( 'timestamp' );
 	}
-	$args = wp_parse_args( $args, [
+	$args     = wp_parse_args( $args, [
 		'channel' => $channel_id,
 		'latest'  => $latest,
 		'oldest'  => $oldest,
 	] );
 	$response = hameslack_bot_request( 'GET', 'channels.history', $args );
-	return is_wp_error( $response ) ? $response : $response->messages ;
+	return is_wp_error( $response ) ? $response : $response->messages;
 }
 
