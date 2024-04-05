@@ -1,5 +1,6 @@
 {
     "name": "hametuha/hameslack",
+	"description": "A simple slack integration for WordPress.",
     "type": "wordpress-plugin",
     "license": "GPL-3.0-or-later",
     "authors": [
