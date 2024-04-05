@@ -3,9 +3,9 @@
 Plugin Name: HameSlack
 Plugin URI: https://wordpress.org/extend/plugins/hameslack/
 Description: A WordPress utility for Slack.
-Author: Takahashi_Fumiki
+Author: Hametuha INC
 Version: nightly
-Author URI: https://gianism.info/add-on/hameslack/
+Author URI: https://hametuha.co.jp
 License: GPL3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Text Domain: hameslack

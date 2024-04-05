@@ -1,7 +1,7 @@
 # HameSlack
 
 Tags: slack  
-Contributors: Takahashi_Fumiki  
+Contributors: Takahashi_Fumiki, hametuha  
 Tested up to: 6.4  
 Requires at least: 5.9  
 Requires PHP: 7.2  
