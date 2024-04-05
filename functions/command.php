@@ -143,6 +143,6 @@ class HameSlackCommand extends WP_CLI_Command {
 		if ( is_wp_error( $result ) ) {
 			WP_CLI::error( $result->get_error_message() );
 		}
-		print_r( $result );
+		WP_CLI::success( __( 'Successfully send invitation to slack.', 'hameslack' ) );
 	}
 }

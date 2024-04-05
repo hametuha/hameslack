@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || die();
  * @return array
  */
 add_filter( 'user_contactmethods', function ( $methods ) {
-	if ( hameslack_invite_api_token() ) {
+	if ( hameslack_user_invitation_channel() ) {
 		$methods['slack'] = __( 'Slack User Name', 'hameslack' );
 	}
 	return $methods;
@@ -25,7 +25,7 @@ add_filter( 'user_contactmethods', function ( $methods ) {
  * Register rest route for invitation
  */
 add_action( 'rest_api_init', function () {
-	if ( ! hameslack_invite_api_token() ) {
+	if ( ! hameslack_user_invitation_channel() ) {
 		return;
 	}
 	// Register POST route.
@@ -70,7 +70,7 @@ add_action( 'rest_api_init', function () {
 				}
 				return new WP_REST_Response( [
 					'success' => true,
-					'message' => __( 'Invitation mail has been sent! Please check mailbox and follow the instructions.', 'hameslack' ),
+					'message' => __( 'An invitation request are sent to the workspace. Please be patient until the request is approved.', 'hameslack' ),
 				] );
 			},
 		],
@@ -83,7 +83,7 @@ add_action( 'rest_api_init', function () {
  * @param WP_User $user
  */
 add_action( 'show_user_profile', function ( $user ) {
-	if ( ! hameslack_invite_api_token() ) {
+	if ( ! hameslack_user_invitation_channel() ) {
 		// Do nothing.
 		return;
 	}

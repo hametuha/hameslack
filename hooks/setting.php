@@ -178,6 +178,20 @@ add_action( 'admin_init', function() {
 		<?php
 	}, 'hameslack', 'hameslack-credentials' );
 	register_setting( 'hameslack', 'hameslack_bot_key' );
+
+	add_settings_field( 'hameslack_invitation_channel', __( 'Invitation Channel', 'hameslack' ), function () {
+		?>
+		<input type="text" class="regular-text" name="hameslack_invitation_channel"
+			   value="<?php echo esc_attr( get_option( 'hameslack_invitation_channel' ) ); ?>"
+			   placeholder="private-channel"/>
+		<p class="description">
+			<?php
+			esc_html_e( 'If set, user can request an invitation and a bot will notify on this channel.', 'hameslack' );
+			?>
+		</p>
+		<?php
+	}, 'hameslack', 'hameslack-credentials' );
+	register_setting( 'hameslack', 'hameslack_invitation_channel' );
 }  );
 
 /**
