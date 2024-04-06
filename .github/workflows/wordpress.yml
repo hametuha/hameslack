@@ -89,8 +89,8 @@ jobs:
         with:
           generate-zip: true
         env:
-          SVN_USERNAME: ${{ secrets.WP_ORG_USERNAME }}
-          SVN_PASSWORD: ${{ secrets.WP_ORG_PASSWORD }}
+          SVN_USERNAME: ${{ secrets.WP_ORG_USER_FUMIKI }}
+          SVN_PASSWORD: ${{ secrets.WP_ORG_PASS_FUMIKI }}
 
       - name: Create Release
         id: create_release
