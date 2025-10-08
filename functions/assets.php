@@ -13,5 +13,5 @@
  * @return string
  */
 function hameslack_asset_url() {
-	return untrailingslashit( plugin_dir_url( __DIR__ ) ) . '/src/';
+	return untrailingslashit( plugin_dir_url( __DIR__ ) ) . '/dist';
 }

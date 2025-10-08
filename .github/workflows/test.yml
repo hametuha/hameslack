@@ -1,0 +1,55 @@
+name: Test WordPress Plugin
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        php: [ '7.4', '8.2' ] # PHP versions to check.
+        wp: [ 'latest', '6.6' ]      # WordPress version to check.
+    uses: tarosky/workflows/.github/workflows/wp-unit-test.yml@main
+    with:
+      php_version: ${{ matrix.php }}
+      wp_version: ${{ matrix.wp }}
+
+  phpcs:
+    uses: tarosky/workflows/.github/workflows/phpcs.yml@main
+    with:
+      version: 7.4
+
+  phplint:
+    uses: tarosky/workflows/.github/workflows/phplint.yml@main
+
+  assets:
+    name: Assets Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+
+      - name: Install Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install NPM Packages
+        run: npm install
+
+      - name: Check JS & CSS syntax
+        run: npm run lint
+
+      - name: Build Check
+        run: npm run package
+
+  status-check:
+    name: Status Check
+    needs: [ test, phpcs, phplint, assets ]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: re-actors/alls-green@release/v1
+        with:
+          jobs: ${{ toJSON(needs) }}

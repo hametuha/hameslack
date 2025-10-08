@@ -1,6 +1,11 @@
 {
-	"plugins": [ "." ],
+	"phpVersion": "7.4",
+	"plugins": [
+		".",
+		"./vendor/plugins/gianism/",
+		"https://downloads.wordpress.org/plugin/query-monitor.latest-stable.zip"
+	],
 	"themes": [
-		"https://downloads.wordpress.org/theme/twentytwenty.latest-stable.zip"
+		"https://downloads.wordpress.org/theme/twentytwentyone.latest-stable.zip"
 	]
 }

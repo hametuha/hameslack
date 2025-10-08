@@ -142,4 +142,3 @@ function hameslack_bot_key( $raw = false ) {
 	 */
 	return apply_filters( 'hameslack_bot_key', $key );
 }
-
