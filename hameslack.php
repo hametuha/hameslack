@@ -5,8 +5,8 @@ Plugin URI: https://wordpress.org/extend/plugins/hameslack/
 Description: A WordPress utility for Slack.
 Author: Hametuha INC
 Version: nightly
-Requires at least: 5.9
-Requires PHP: 7.2
+Requires at least: 6.6
+Requires PHP: 7.4
 Author URI: https://hametuha.co.jp
 License: GPL3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -17,7 +17,7 @@ Domain Path: /languages
 defined( 'ABSPATH' ) or die();
 
 // Load autoloader.
-require dirname( __FILE__ ) . '/vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
 /**
  * Initialize hameslack.
@@ -28,18 +28,15 @@ require dirname( __FILE__ ) . '/vendor/autoload.php';
 function hameslack_initialize() {
 	// Get version number
 	$info = get_file_data( __FILE__, array(
-		'version'     => 'Version',
-		'php_version' => 'Requires PHP',
-		'domain'      => 'Text Domain',
+		'version' => 'Version',
+		'domain'  => 'Text Domain',
 	) );
 
 	load_plugin_textdomain( $info['domain'], true, basename( __DIR__ ) . '/languages' );
 
 	define( 'HAMESLACK_VERSION', $info['version'] );
-	define( 'HAMESLACK_ROOT_DIR', dirname( __FILE__ ) );
+	define( 'HAMESLACK_ROOT_DIR', __DIR__ );
 
-	// Register auto loader.
-	require dirname( __FILE__ ) . '/vendor/autoload.php';
 	// Load functions
 	foreach ( array( 'functions', 'hooks' ) as $dir_name ) {
 		$dir = __DIR__ . '/' . $dir_name . '/';

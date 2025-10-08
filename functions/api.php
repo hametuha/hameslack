@@ -152,7 +152,7 @@ function hameslack_members( $names = [] ) {
 		return $response;
 	}
 	if ( $names ) {
-		$users = array_filter( $response->members, function( $member ) use ( $names ) {
+		$users = array_filter( $response->members, function ( $member ) use ( $names ) {
 			return in_array( $member->name, $names, true );
 		} );
 	} else {
@@ -217,4 +217,3 @@ function hameslack_channel_history( $channel, $oldest = -1, $latest = -1, $args 
 	$response = hameslack_bot_request( 'GET', 'channels.history', $args );
 	return is_wp_error( $response ) ? $response : $response->messages;
 }
-

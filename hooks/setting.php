@@ -102,7 +102,7 @@ add_action( 'admin_menu', function () {
 /**
  * Register settings API.
  */
-add_action( 'admin_init', function() {
+add_action( 'admin_init', function () {
 	add_settings_section( 'hameslack-credentials', __( 'Slack Credentials', 'hameslack' ), function () {
 		printf( '<p class="description">%s</p>', __( 'Credential information for Slack Bot.', 'hameslack' ) );
 	}, 'hameslack' );

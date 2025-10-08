@@ -74,14 +74,14 @@ class Slack extends AbstractService {
 	public function __construct( array $argument = [] ) {
 		parent::__construct( $argument );
 		// Filter rewrite name
-		add_filter( 'gianism_filter_service_prefix', function( $prefix ) {
+		add_filter( 'gianism_filter_service_prefix', function ( $prefix ) {
 			if ( 'slack-auth' === $prefix ) {
 				$prefix = 'slack';
 			}
 			return $prefix;
 		} );
 		// Register assets.
-		add_action( 'init', function() {
+		add_action( 'init', function () {
 			wp_register_style( 'hameslack-gianism', hameslack_asset_url() . '/css/gianism.css', [ 'gianism' ], HAMESLACK_VERSION );
 		} );
 		// Enqueue assets.

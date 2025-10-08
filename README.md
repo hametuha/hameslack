@@ -2,7 +2,7 @@
 
 Tags: slack  
 Contributors: Takahashi_Fumiki, hametuha  
-Tested up to: 6.4  
+Tested up to: 6.8  
 Stable Tag: nightly  
 License: GPLv3 or later  
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
@@ -78,9 +78,13 @@ If you have any request, please make issue on [github](https://github.com/hametu
 
 ## Changelog
 
+### 2.1.0
+
+- Bump required versions: PHP 7.4 and WP 6.6
+
 ### 2.0.0
 
-- Remove invitation feature and users now can simple send message to specific channel to request invitation.
+- Remove invitation feature and users now can send a simple message to specific channel to request invitation.
 - Bot is required.
 
 ### 1.2.0
