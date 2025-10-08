@@ -21,7 +21,7 @@
 	"license": "LGPL-3.0-or-later",
 	"devDependencies": {
 		"@babel/eslint-parser": "^7.24.1",
-		"@wordpress/env": "^9.0",
+		"@wordpress/env": "^10.32",
 		"@wordpress/eslint-plugin": "^17.11.0",
 		"autoprefixer": "^10.4.19",
 		"cssnano": "^6.1.2",
