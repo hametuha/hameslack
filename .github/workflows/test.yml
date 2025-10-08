@@ -9,7 +9,7 @@ jobs:
   test:
     strategy:
       matrix:
-        php: [ '7.4', '8.0', '8.2' ] # PHP versions to check.
+        php: [ '7.4', '8.2' ] # PHP versions to check.
         wp: [ 'latest', '6.6' ]      # WordPress version to check.
     uses: tarosky/workflows/.github/workflows/wp-unit-test.yml@main
     with:
@@ -19,7 +19,7 @@ jobs:
   phpcs:
     uses: tarosky/workflows/.github/workflows/phpcs.yml@main
     with:
-      version: 8.0
+      version: 7.4
 
   phplint:
     uses: tarosky/workflows/.github/workflows/phplint.yml@main
@@ -31,9 +31,9 @@ jobs:
       - uses: actions/checkout@main
 
       - name: Install Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: '20'
 
       - name: Install NPM Packages
         run: npm install
