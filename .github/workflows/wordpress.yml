@@ -2,55 +2,25 @@ name: Deploy Plugin
 
 on:
   push:
-    branches:
-      - master
     tags:
       - '*'
-  pull_request:
-    branches:
-      - master
 
 jobs:
-  test:
-    strategy:
-      matrix:
-        php: [ '7.2', '8.0', '8.2' ] # PHP versions to check.
-        wp: [ 'latest', '5.9' ]      # WordPress version to check.
-    uses: tarosky/workflows/.github/workflows/wp-unit-test.yml@main
+  branch-check:
+    name: Check Branch for Tag
+    uses: tarosky/workflows/.github/workflows/check-tag-in-branch.yml@main
+    if: contains(github.ref, 'refs/tags/')
     with:
-      php_version: ${{ matrix.php }}
-      wp_version: ${{ matrix.wp }}
+      allowed_branch: "master"
 
-  phpcs:
-    uses: tarosky/workflows/.github/workflows/phpcs.yml@main
-    with:
-      version: 8.0
-
-  phplint:
-    uses: tarosky/workflows/.github/workflows/phplint.yml@main
-
-  assets:
-    name: Assets Test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@main
-
-      - name: Install Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-
-      - name: Install NPM Packages
-        run: npm install
-
-      - name: Check JS & CSS syntax
-        run: npm run lint
 
   release:
     name: Deploy WordPress.org
-    needs: [ test, phpcs, phplint, assets ]
-    if: contains(github.ref, 'tags/')
+    needs: [ branch-check ]
     runs-on: ubuntu-latest
+    environment:
+      name: release
+      url: https://wordpress.org/plugins/hameslack/
     steps:
       - name: Checkout code
         uses: actions/checkout@main

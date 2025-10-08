@@ -5,6 +5,8 @@ Plugin URI: https://wordpress.org/extend/plugins/hameslack/
 Description: A WordPress utility for Slack.
 Author: Hametuha INC
 Version: nightly
+Requires at least: 5.9
+Requires PHP: 7.2
 Author URI: https://hametuha.co.jp
 License: GPL3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -27,7 +29,7 @@ function hameslack_initialize() {
 	// Get version number
 	$info = get_file_data( __FILE__, array(
 		'version'     => 'Version',
-		'php_version' => 'PHP Version',
+		'php_version' => 'Requires PHP',
 		'domain'      => 'Text Domain',
 	) );
 
