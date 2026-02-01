@@ -34,7 +34,7 @@
 		"wp-coding-standards/wpcs": "^3.1",
 		"yoast/phpunit-polyfills": "^2.0",
 		"phpcompatibility/php-compatibility": "^9.3",
-		"wpackagist-plugin/gianism":"^5.3.0",
+		"wpackagist-plugin/gianism":"^6.0.0",
 		"johnpbloch/wordpress": "6.8"
 	},
     "autoload": {
