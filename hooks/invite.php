@@ -99,8 +99,12 @@ add_action( 'show_user_profile', function ( $user ) {
 		// Do nothing.
 		return;
 	}
-	wp_enqueue_script( 'hameslack-invitation-button', hameslack_asset_url() . '/js/hameslack-invite-button.js', [ 'jquery' ], HAMESLACK_VERSION, true );
-	wp_localize_script( 'hameslack-invitation-button', 'HameslackInvitation', [
+	// Register with jQuery dependency if not already registered via wp-dependencies.json.
+	if ( ! wp_script_is( 'hameslack-invite-button', 'registered' ) ) {
+		wp_register_script( 'hameslack-invite-button', hameslack_asset_url() . '/js/hameslack-invite-button.js', [ 'jquery' ], HAMESLACK_VERSION, true );
+	}
+	wp_enqueue_script( 'hameslack-invite-button' );
+	wp_localize_script( 'hameslack-invite-button', 'HameslackInvitation', [
 		'nonce'    => wp_create_nonce( 'wp_rest' ),
 		'endpoint' => rest_url( '/hameslack/v1/invitation/me' ),
 		'error'    => __( 'Failed to send request. Please try again later, or contact to admin.', 'hamail' ),

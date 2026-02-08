@@ -1,55 +1,61 @@
 {
 	"name": "hameslack",
-	"main": "gulpfile.js",
 	"scripts": {
 		"start": "wp-env start",
 		"update": "wp-env start --update",
 		"stop": "wp-env stop",
+		"env": "wp-env",
 		"cli": "wp-env run cli wp",
 		"cli:test": "wp-env run tests-cli wp",
-		"package": "npm run sass && npm run js && npm run img",
+		"package": "npm run build:css && npm run build:js && npm run dump",
 		"watch": "npm-watch",
+		"build:css": "sass ./src/scss/:./assets/css/ --style=compressed && postcss ./assets/css/*.css --use autoprefixer --replace",
+		"build:js": "grab-deps js src/js assets/js",
+		"dump": "grab-deps dump assets/js,assets/css",
 		"composer": "wp-env run cli --env-cwd='wp-content/plugins/hameslack' composer",
-		"test": "RESULT=${PWD##*/} && wp-env run tests-cli ./wp-content/plugins/$RESULT/vendor/bin/phpunit -c ./wp-content/plugins/$RESULT/phpunit.xml.dist",
-		"sass": "sass ./src/scss/:./dist/css/ && postcss --use autoprefixer cssnano --replace ./dist/css/**/*.css",
-		"js": "uglifyjs-folder ./src/js/ -x .js -eo ./dist/js/ --log-level error",
-		"img": "imagemin src/img/*.{jpg,png,gif,svg} --plugin=pngquant --plugin=mozjpeg --plugin=gifsicle --plugin=svgo --out-dir=dist/img",
-		"lint": "npm run lint:js && npm run lint:css",
-		"lint:js": "eslint src/js",
-		"lint:css": "stylelint src/scss",
-		"fix:js": "eslint --fix -c .eslintrc src/js",
-		"fix:css": "stylelint --fix src/scss"
+		"test": "wp-env run tests-cli --env-cwd=wp-content/plugins/hameslack ./vendor/bin/phpunit",
+		"lint": "npm run lint:css && npm run lint:js",
+		"lint:css": "wp-scripts lint-style './src/scss/**/*.scss'",
+		"lint:js": "wp-scripts lint-js './src/js/**/*.js'",
+		"fix": "npm run fix:js && npm run fix:css",
+		"fix:js": "wp-scripts lint-js --fix './src/js/**/*.js'",
+		"fix:css": "wp-scripts lint-style --fix './src/scss/**/*.scss'",
+		"prepare": "husky"
 	},
 	"author": "Hametuha INC.",
 	"license": "LGPL-3.0-or-later",
 	"devDependencies": {
-		"@babel/eslint-parser": "^7.24.1",
+		"@kunoichi/grab-deps": "^3.0.0",
 		"@wordpress/env": "^10.32.0",
-		"@wordpress/eslint-plugin": "^22.18.0",
-		"@wordpress/stylelint-config": "^23.24.0",
+		"@wordpress/scripts": "^30.0.0",
 		"autoprefixer": "^10.4.19",
-		"cssnano": "^7.1.1",
-		"eslint": "^8.57.1",
-		"imagemin-cli": "^8.0.0",
-		"imagemin-gifsicle": "^7.0.0",
-		"imagemin-mozjpeg": "^10.0.0",
-		"imagemin-pngquant": "^10.0.0",
-		"imagemin-svgo": "^11.0.1",
+		"husky": "^9.1.7",
+		"lint-staged": "^16.2.7",
 		"npm-watch": "^0.13.0",
 		"postcss": "^8.4.38",
 		"postcss-cli": "^11.0.0",
-		"sass": "^1.72.0",
-		"stylelint": "^16.25.0",
-		"uglifyjs": "^2.4.11",
-		"uglifyjs-folder": "^3.3.0"
+		"sass": "^1.72.0"
 	},
 	"volta": {
-		"node": "20.19.5"
+		"node": "22.12.0"
+	},
+	"engines": {
+		"node": ">=22.0"
 	},
 	"watch": {
-		"js:build": "src/js/**/*.js",
-		"lint:js": "src/js/**/*.js",
-		"lint:css": "src/scss/**/*.scss",
-		"sass": "src/scss/**/*.scss"
+		"build:css": {
+			"patterns": ["src/scss"],
+			"extensions": "scss"
+		},
+		"build:js": {
+			"patterns": ["src/js"],
+			"extensions": "js"
+		}
+	},
+	"lint-staged": {
+		"src/**/*.js": "npm run lint:js",
+		"src/**/*.scss": "npm run lint:css",
+		"*.php": "composer lint",
+		"app/**/*.php": "composer lint"
 	}
 }

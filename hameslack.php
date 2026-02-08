@@ -38,7 +38,7 @@ function hameslack_initialize() {
 	define( 'HAMESLACK_ROOT_DIR', __DIR__ );
 
 	// Load functions
-	foreach ( array( 'functions', 'hooks' ) as $dir_name ) {
+	foreach ( [ 'functions', 'hooks' ] as $dir_name ) {
 		$dir = __DIR__ . '/' . $dir_name . '/';
 		if ( ! is_dir( $dir ) ) {
 			continue;
@@ -51,6 +51,13 @@ function hameslack_initialize() {
 	}
 }
 add_action( 'plugins_loaded', 'hameslack_initialize', 9 );
+
+/**
+ * Register assets from wp-dependencies.json.
+ *
+ * @since 2.1.0
+ */
+add_action( 'init', 'hameslack_register_assets' );
 
 /**
  * Register slack for gianism.
