@@ -70,6 +70,61 @@ As mentioned avobe, this plugin does nothing by default. Please read our [Docume
 
 If you have any request, please make issue on [github](https://github.com/hametuha/hameslack).
 
+## Development
+
+This plugin requires custom code to work with your Slack workspace. Here's how to set up a local development environment.
+
+### Prerequisites
+
+- Node.js >= 22 (managed via [Volta](https://volta.sh/))
+- Docker Desktop (for [wp-env](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/))
+- [cloudflared](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/get-started/) (for Slack Webhook testing)
+
+### Getting Started
+
+<pre>
+# Install dependencies
+npm install
+composer install
+
+# Start WordPress local environment
+npm start
+
+# Build assets
+npm run package
+
+# Watch for changes during development
+npm run watch
+</pre>
+
+### Receiving Slack Webhooks Locally
+
+Slack requires a public HTTPS URL for Event Subscriptions and Interactive Components. Use Cloudflare Tunnel to expose your local environment:
+
+<pre>
+# In a separate terminal, start the tunnel
+npm run tunnel
+</pre>
+
+This gives you a temporary public URL like `https://random-name.trycloudflare.com`. Then:
+
+1. Go to your [Slack App settings](https://api.slack.com/apps)
+2. Update **Event Subscriptions** Request URL to `https://random-name.trycloudflare.com/wp-json/hameslack/v1/...`
+3. Update **Interactivity & Shortcuts** Request URL similarly
+4. The URL changes each time you restart the tunnel
+
+### NPM Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm start` | Start wp-env |
+| `npm run package` | Build all assets (CSS + JS) |
+| `npm run watch` | Watch for file changes |
+| `npm run tunnel` | Open Cloudflare Tunnel to localhost:8888 |
+| `npm run lint` | Run ESLint + Stylelint |
+| `npm run fix` | Auto-fix lint errors |
+| `npm test` | Run PHPUnit tests |
+
 ## Screenshots
 
 1. You can create such kind of bot.

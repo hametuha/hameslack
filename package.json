@@ -20,6 +20,7 @@
 		"fix": "npm run fix:js && npm run fix:css",
 		"fix:js": "wp-scripts lint-js --fix './src/js/**/*.js'",
 		"fix:css": "wp-scripts lint-style --fix './src/scss/**/*.scss'",
+		"tunnel": "cloudflared tunnel --url http://localhost:8888",
 		"prepare": "husky"
 	},
 	"author": "Hametuha INC.",
