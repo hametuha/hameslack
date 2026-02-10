@@ -1,6 +1,9 @@
 name: Test WordPress Plugin
 
 on:
+  push:
+    branches:
+      - master
   pull_request:
     branches:
       - master
@@ -9,37 +12,57 @@ jobs:
   test:
     strategy:
       matrix:
-        php: [ '7.4', '8.2' ] # PHP versions to check.
-        wp: [ 'latest', '6.6' ]      # WordPress version to check.
+        php: [ '7.4', '8.3' ]
+        wp: [ 'latest', '6.6' ]
     uses: tarosky/workflows/.github/workflows/wp-unit-test.yml@main
     with:
       php_version: ${{ matrix.php }}
       wp_version: ${{ matrix.wp }}
 
   phpcs:
-    uses: tarosky/workflows/.github/workflows/phpcs.yml@main
-    with:
-      version: 7.4
+    name: PHP Syntax Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP with composer v2
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+          tools: composer
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies
+        run: composer install --no-progress
+
+      - name: PHP CodeSniffer
+        run: composer lint
 
   phplint:
     uses: tarosky/workflows/.github/workflows/phplint.yml@main
+    with:
+      php_versions: '["7.4", "8.3"]'
 
   assets:
-    name: Assets Test
+    name: Test Assets
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@main
+      - uses: actions/checkout@v4
 
-      - name: Install Node
+      - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
 
-      - name: Install NPM Packages
+      - name: Install NPM Dependencies
         run: npm install
 
-      - name: Check JS & CSS syntax
-        run: npm run lint
+      - name: Lint JS
+        run: npm run lint:js
+
+      - name: Lint CSS
+        run: npm run lint:css
 
       - name: Build Check
         run: npm run package

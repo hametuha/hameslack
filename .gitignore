@@ -1,8 +1,12 @@
 .svn/
+.claude/
 /node_modules/
 /vendor/
 /readme.txt
 /dist/
+/assets/css/
+/assets/js/
+/wp-dependencies.json
 composer.lock
 /wp/
 *.cache

@@ -2,26 +2,35 @@
 
 set -e
 
-composer install --no-dev
-#npm install
-#npm start
-#rm -rf node_modules
+# Extract version from tag (remove 'v' prefix if present)
+if [ -z "$1" ]; then
+  echo "Error: No tag provided"
+  exit 1
+fi
 
-rm -rf .travis.yml
-rm .gitignore
-rm phpunit.xml.dist
-rm -rf tests
-rm -rf bin
+TAG_NAME=$1
+# Remove 'refs/tags/' prefix if present (from GitHub Actions)
+TAG_NAME=${TAG_NAME#refs/tags/}
+# Remove 'v' prefix if present
+VERSION=${TAG_NAME#v}
 
-if [ $TRAVIS_TAG ]; then
-    echo $TRAVIS_TAG
-fi
-if [ $SVN_USER ]; then
-    echo "SVN_USER exists."
-fi
-if [ $SVN_PASS ]; then
-    echo "SVN_PASS exists."
-fi
+echo "Building version: ${VERSION} from tag: ${TAG_NAME}"
+
+# Build files
+composer install --no-dev --prefer-dist
+
+# NPM packages.
+npm install
+npm run package
+
 # Make Readme
 echo 'Generate readme.'
 curl -L https://raw.githubusercontent.com/fumikito/wp-readme/master/wp-readme.php | php
+
+# Change version string.
+echo "Updating version to ${VERSION} in hameslack.php and readme.txt"
+sed -i.bak "s/\* Version: .*/\* Version: ${VERSION}/g" ./hameslack.php
+sed -i.bak "s/^Stable Tag: .*/Stable Tag: ${VERSION}/g" ./readme.txt
+
+# Clean up backup files
+rm -f ./hameslack.php.bak ./readme.txt.bak

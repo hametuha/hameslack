@@ -80,10 +80,17 @@ class Slack extends AbstractService {
 			}
 			return $prefix;
 		} );
-		// Register assets.
+		// Register Gianism CSS with proper dependency.
 		add_action( 'init', function () {
-			wp_register_style( 'hameslack-gianism', hameslack_asset_url() . '/css/gianism.css', [ 'gianism' ], HAMESLACK_VERSION );
-		} );
+			if ( wp_style_is( 'hameslack-gianism', 'registered' ) ) {
+				// Already registered via wp-dependencies.json; add gianism dependency.
+				global $wp_styles;
+				$wp_styles->registered['hameslack-gianism']->deps[] = 'gianism';
+			} else {
+				// Fallback: manual registration.
+				wp_register_style( 'hameslack-gianism', hameslack_asset_url() . '/css/hameslack-gianism.css', [ 'gianism' ], HAMESLACK_VERSION );
+			}
+		}, 20 );
 		// Enqueue assets.
 		add_action( 'login_enqueue_scripts', [ $this, 'enqueue_assets' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_assets' ] );
