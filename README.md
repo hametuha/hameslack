@@ -113,6 +113,8 @@ This gives you a temporary public URL like `https://random-name.trycloudflare.co
 3. Update **Interactivity & Shortcuts** Request URL similarly
 4. The URL changes each time you restart the tunnel
 
+**Note:** Make sure WordPress permalink settings are not set to "Plain" — pretty permalinks are required for `/wp-json/` to work through the tunnel.
+
 ### NPM Scripts
 
 | Command | Description |
