@@ -9,4 +9,4 @@
 /wp-dependencies.json
 composer.lock
 /wp/
-*.cache
+/*.cache
