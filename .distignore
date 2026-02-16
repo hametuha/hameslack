@@ -6,6 +6,7 @@
 .gitignore
 .husky
 .wp-env.json
+.wordpress-org
 node_modules
 composer.lock
 package.json
