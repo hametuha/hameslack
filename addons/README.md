@@ -46,6 +46,32 @@ add_action( 'init', function () {
 | `hameslack_is_addon_active( $id )` | Check if a specific addon is active |
 | `hameslack_get_active_addons()` | Returns active addons as associative array |
 
+## Sending Messages to Slack
+
+HameSlack provides a simple action hook to send messages to Slack via Incoming Webhook (Payload URL):
+
+```php
+do_action( 'hameslack', $content, $attachment, $channel );
+```
+
+| Parameter | Type | Description |
+|---|---|---|
+| `$content` | `string` | Message text |
+| `$attachment` | `array` | Slack attachment array (optional, default `[]`) |
+| `$channel` | `string` | Channel name (optional, defaults to `hameslack_default_channel` filter value) |
+
+This uses the `do_action` pattern so that **your code won't break even if HameSlack is deactivated** — WordPress simply ignores unknown action hooks.
+
+Example: notify Slack when a post is published:
+
+```php
+add_action( 'transition_post_status', function ( $new_status, $old_status, $post ) {
+    if ( 'publish' === $new_status && 'publish' !== $old_status && 'post' === $post->post_type ) {
+        do_action( 'hameslack', 'New post published: ' . get_the_title( $post ) );
+    }
+}, 10, 3 );
+```
+
 ## Built-in Addons
 
 ### Pending Review Notify (`pending-review-notify`)

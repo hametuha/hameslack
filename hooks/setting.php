@@ -86,12 +86,12 @@ add_action( 'admin_menu', function () {
 
 			<h2><?php esc_html_e( 'How to Use', 'hameslack' ); ?></h2>
 			<p>
-				<?php esc_html_e( 'This plugin does nothing by default. ', 'hameslack' ); ?>
+				<?php esc_html_e( 'Enable addons above to get started, or use the hameslack action hook in your theme or plugin.', 'hameslack' ); ?>
 			</p>
 			<p>
 				<?php
-				// translators: %s is link to documentation.
-				printf( __( 'For more details and hooks, see our <a href="%s" target="_blank">documentation</a>.', 'hameslack' ), 'https://gianism.info/addon/hameslack/' );
+				// translators: %s is link to GitHub documentation.
+				printf( __( 'For more details, see the <a href="%s" target="_blank">documentation on GitHub</a>.', 'hameslack' ), 'https://github.com/hametuha/hameslack/blob/master/addons/README.md' );
 				?>
 			</p>
 		</div>
