@@ -1,8 +1,8 @@
 # HameSlack
 
 Tags: slack  
-Contributors: Takahashi_Fumiki, hametuha  
-Tested up to: 6.8  
+Contributors: hametuha, Takahashi_Fumiki  
+Tested up to: 6.9  
 Stable Tag: nightly  
 License: GPLv3 or later  
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
@@ -16,10 +16,10 @@ This plugin integrates [Slack](https://slack.com) and WordPress.
 ### Core Conception
 
 By default, this plugin does nothing. It's true. 
-Slack has many API intergrations, but **hameslack** uses 2 of them.
+Slack has many API integration, but **hameslack** uses 2 of them.
 
 - [Incoming Webhook](https://api.slack.com/incoming-webhooks) to post to slack.
-- [Custom Bot](https://api.slack.com/bot-users) to interact with slack.
+- [Slack App](https://api.slack.com/apps) to interact with slack.
 
 Upper is easier. This plugin helps the connection between Slack and WordPress and you can concentrate on what you should do with slack.
 
@@ -28,10 +28,10 @@ Upper is easier. This plugin helps the connection between Slack and WordPress an
 Here is a list of use case of us on WordPress with many editors.
 
 - **Easy** Post notification to slack if some post is awaiting review.
-- **Bit Difficult** Post accesss summary to slack once a week, because my collegue doesn't open Google Analytics.
+- **Difficult** Post access summary to slack once a week, because my colleague doesn't open Google Analytics.
 - **Very Difficult** Convert slack conversation to single post and make interview post.
 
-For more details, please read our [Documentation](https://gianism.info/add-on/hameslack/). We have some samples.
+For more details, please read the [Addons documentation](https://github.com/hametuha/hameslack/blob/master/addons/README.md).
 
 ### How to Integrate
 
@@ -41,7 +41,7 @@ The simplest usage is *post to slack*. You can do like below:
 do_action( 'hameslack', $text_to_post, $attachments, $channel );
 </pre>
 
-Function is also available, but I prefer to use `do_action` to avoid annoying `if ( function_exists('func_name')) `.
+Function `hameslack_post( $content, $attachment, $channel )` is also available, but I prefer to use `do_action` to avoid annoying `if ( function_exists('func_name')) `.
 
 Everything works fine if you set properly.
 
@@ -56,17 +56,20 @@ Everything works fine if you set properly.
 
 Click install and activate it.
 
-### From Github
+### From GitHub
 
-Download and you can use it. Any pull requests are welcomed.
+Download from [Releases](https://github.com/hametuha/hameslack/releases) and you can use it. Any pull requests are welcomed.
 
-### Enter API Key
+### Enter Credentials
 
-At least, you need [Slack Payload URL for Incoming Webhooks](https://api.slack.com/incoming-webhooks). For more details, go to our [support site](https://gianism.info/add-on/hameslack/).
+To post a message to slack, you need Payload URL. [Create an app](https://api.slack.com/apps/) and activate "Incoming Webhooks".
+Now you can get payload URL.
+
+To get Bot Token, go to "OAuth & Permissions". By installing your app to your workspace, Bot token will be generated.
 
 ### Do something
 
-As mentioned avobe, this plugin does nothing by default. Please read our [Documentation](https://gianism.info/add-on/hameslack/).
+As mentioned above, this plugin does nothing by default. Enable built-in addons from the settings page, or read the [Addons documentation](https://github.com/hametuha/hameslack/blob/master/addons/README.md) to write your own.
 
 If you have any request, please make issue on [github](https://github.com/hametuha/hameslack).
 
@@ -134,6 +137,12 @@ This gives you a temporary public URL like `https://random-name.trycloudflare.co
 3. You can create Outgoing Webhooks as custom post type.
 
 ## Changelog
+
+### 2.2.0
+
+- Add hook-based addon system with settings UI.
+- Add built-in addons: Pending Review Notify (Incoming Webhook sample) and Slash Command Dashboard (Bot Token sample).
+- Fix double URL-encoding in `hameslack_bot_request()` for POST requests.
 
 ### 2.1.0
 

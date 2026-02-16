@@ -9,4 +9,5 @@
 /wp-dependencies.json
 composer.lock
 /wp/
+/tmp/
 /*.cache

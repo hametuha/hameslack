@@ -81,17 +81,6 @@ function hameslack_bot_request( $method, $endpoint, $params = [] ) {
 		}
 		$params['token'] = $token;
 	}
-	$params_escaped = [];
-	foreach ( $params as $key => $value ) {
-		switch ( $key ) {
-			case 'email':
-				$params_escaped[ $key ] = $value;
-				break;
-			default:
-				$params_escaped[ $key ] = rawurlencode( $value );
-				break;
-		}
-	}
 	// Build curl options
 	$options = [
 		CURLOPT_RETURNTRANSFER => true,
@@ -101,12 +90,18 @@ function hameslack_bot_request( $method, $endpoint, $params = [] ) {
 
 	switch ( $method ) {
 		case 'get':
+			// URL-encode parameters for query string.
+			$params_escaped = [];
+			foreach ( $params as $key => $value ) {
+				$params_escaped[ $key ] = rawurlencode( $value );
+			}
 			$options[ CURLOPT_URL ] = add_query_arg( $params_escaped, $endpoint );
 			break;
 		case 'post':
+			// POST with array: curl sends as multipart/form-data and handles encoding.
 			$options[ CURLOPT_URL ]        = $endpoint;
 			$options[ CURLOPT_POST ]       = true;
-			$options[ CURLOPT_POSTFIELDS ] = $params_escaped;
+			$options[ CURLOPT_POSTFIELDS ] = $params;
 			break;
 		default:
 			return new WP_Error( 400, __( 'Only GET or POST is allowed.', 'hameslack' ) );

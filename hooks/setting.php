@@ -17,10 +17,10 @@ add_action( 'admin_menu', function () {
 		?>
 		<div class="wrap">
 
-			<h2>
+			<h1>
 				<img src="<?php echo hameslack_asset_url(); ?>/img/slack_monochrome_black.png" alt="Slack"
 					style="max-width: 200px; width: auto; height: auto;">
-			</h2>
+			</h1>
 
 			<p class="description">
 				<?php
@@ -86,12 +86,12 @@ add_action( 'admin_menu', function () {
 
 			<h2><?php esc_html_e( 'How to Use', 'hameslack' ); ?></h2>
 			<p>
-				<?php esc_html_e( 'This plugin does nothing by default. ', 'hameslack' ); ?>
+				<?php esc_html_e( 'Enable addons above to get started, or use the hameslack action hook in your theme or plugin.', 'hameslack' ); ?>
 			</p>
 			<p>
 				<?php
-				// translators: %s is link to documentation.
-				printf( __( 'For more details and hooks, see our <a href="%s" target="_blank">documentation</a>.', 'hameslack' ), 'https://gianism.info/addon/hameslack/' );
+				// translators: %s is link to GitHub documentation.
+				printf( __( 'For more details, see the <a href="%s" target="_blank">documentation on GitHub</a>.', 'hameslack' ), 'https://github.com/hametuha/hameslack/blob/master/addons/README.md' );
 				?>
 			</p>
 		</div>
@@ -192,6 +192,38 @@ add_action( 'admin_init', function () {
 		<?php
 	}, 'hameslack', 'hameslack-credentials' );
 	register_setting( 'hameslack', 'hameslack_invitation_channel' );
+
+	// Addons section.
+	add_settings_section( 'hameslack-addons', __( 'Addons', 'hameslack' ), function () {
+		printf( '<p class="description">%s</p>', __( 'Enable or disable addon features.', 'hameslack' ) );
+	}, 'hameslack' );
+
+	add_settings_field( 'hameslack_active_addons', __( 'Active Addons', 'hameslack' ), function () {
+		$addons = hameslack_get_addons();
+		if ( empty( $addons ) ) {
+			printf( '<p class="description">%s</p>', esc_html__( 'No addons registered.', 'hameslack' ) );
+			return;
+		}
+		// Hidden placeholder to ensure the field is submitted even when no checkbox is checked.
+		echo '<input type="hidden" name="hameslack_active_addons[__placeholder]" value="1" />';
+		echo '<fieldset>';
+		foreach ( $addons as $addon ) {
+			$id      = esc_attr( $addon['id'] );
+			$checked = hameslack_is_addon_active( $addon['id'] ) ? 'checked' : '';
+			printf(
+				'<label style="display:block; margin-bottom: 0.5em;"><input type="checkbox" name="hameslack_active_addons[%1$s]" value="1" %2$s /> <strong>%3$s</strong> &mdash; %4$s</label>',
+				$id,
+				$checked,
+				esc_html( $addon['label'] ),
+				esc_html( $addon['description'] )
+			);
+		}
+		echo '</fieldset>';
+	}, 'hameslack', 'hameslack-addons' );
+
+	register_setting( 'hameslack', 'hameslack_active_addons', [
+		'sanitize_callback' => 'hameslack_sanitize_active_addons',
+	] );
 }  );
 
 /**

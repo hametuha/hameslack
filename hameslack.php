@@ -38,7 +38,7 @@ function hameslack_initialize() {
 	define( 'HAMESLACK_ROOT_DIR', __DIR__ );
 
 	// Load functions
-	foreach ( [ 'functions', 'hooks' ] as $dir_name ) {
+	foreach ( [ 'functions', 'hooks', 'addons' ] as $dir_name ) {
 		$dir = __DIR__ . '/' . $dir_name . '/';
 		if ( ! is_dir( $dir ) ) {
 			continue;
