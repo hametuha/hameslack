@@ -18,4 +18,3 @@ src
 tests
 *.bak
 CLAUDE.md
-wp-dependencies.json
