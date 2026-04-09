@@ -1,0 +1,73 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Strict comparison using \!\=\= between false and non\-falsy\-string\|true will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: functions/api.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: functions/api.php
+
+		-
+			message: '#^Argument of an invalid type object\|string supplied for foreach, only iterables are supported\.$#'
+			identifier: foreach.nonIterable
+			count: 1
+			path: functions/command.php
+
+		-
+			message: '#^Call to method addRow\(\) on an unknown class cli\\Table\.$#'
+			identifier: class.notFound
+			count: 4
+			path: functions/command.php
+
+		-
+			message: '#^Call to method display\(\) on an unknown class cli\\Table\.$#'
+			identifier: class.notFound
+			count: 4
+			path: functions/command.php
+
+		-
+			message: '#^Call to method setHeaders\(\) on an unknown class cli\\Table\.$#'
+			identifier: class.notFound
+			count: 4
+			path: functions/command.php
+
+		-
+			message: '#^Instantiated class cli\\Table not found\.$#'
+			identifier: class.notFound
+			count: 4
+			path: functions/command.php
+
+		-
+			message: '#^Function hameslack_user_invite\(\) never returns stdClass so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: functions/invititation.php
+
+		-
+			message: '#^Function hameslack_user_invite\(\) should return stdClass\|WP_Error but returns true\.$#'
+			identifier: return.type
+			count: 1
+			path: functions/invititation.php
+
+		-
+			message: '#^Parameter \#2 \$deprecated of function load_plugin_textdomain expects string\|false, true given\.$#'
+			identifier: argument.type
+			count: 1
+			path: hameslack.php
+
+		-
+			message: '#^Parameter \#2 \$code of class Exception constructor expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: hooks/setting.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 2
+			path: hooks/setting.php
