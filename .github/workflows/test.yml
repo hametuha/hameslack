@@ -36,6 +36,26 @@ jobs:
       - name: PHP CodeSniffer
         run: composer lint
 
+  phpstan:
+    name: PHPStan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.3
+          tools: composer
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies
+        run: composer install --no-progress
+
+      - name: Run PHPStan
+        run: composer phpstan
+
   phplint:
     uses: tarosky/workflows/.github/workflows/phplint.yml@main
     with:
@@ -66,7 +86,7 @@ jobs:
 
   status-check:
     name: Status Check
-    needs: [ test, phpcs, phplint, assets ]
+    needs: [ test, phpcs, phpstan, phplint, assets ]
     if: always()
     runs-on: ubuntu-latest
     steps:
