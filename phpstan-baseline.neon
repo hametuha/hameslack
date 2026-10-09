@@ -55,12 +55,6 @@ parameters:
 			path: functions/invititation.php
 
 		-
-			message: '#^Parameter \#2 \$deprecated of function load_plugin_textdomain expects string\|false, true given\.$#'
-			identifier: argument.type
-			count: 1
-			path: hameslack.php
-
-		-
 			message: '#^Parameter \#2 \$code of class Exception constructor expects int, string given\.$#'
 			identifier: argument.type
 			count: 1
