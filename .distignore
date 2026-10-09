@@ -18,7 +18,7 @@ phpstan-bootstrap.php
 phpunit.xml.dist
 README.md
 bin
-src
+/src
 tests
 *.bak
 CLAUDE.md
