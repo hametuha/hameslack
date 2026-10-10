@@ -32,7 +32,7 @@ function hameslack_initialize() {
 		'domain'  => 'Text Domain',
 	) );
 
-	load_plugin_textdomain( $info['domain'], true, basename( __DIR__ ) . '/languages' );
+	load_plugin_textdomain( $info['domain'], false, basename( __DIR__ ) . '/languages' );
 
 	define( 'HAMESLACK_VERSION', $info['version'] );
 	define( 'HAMESLACK_ROOT_DIR', __DIR__ );
