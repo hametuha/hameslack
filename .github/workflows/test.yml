@@ -1,4 +1,4 @@
-name: Test WordPress Plugin
+name: Test Plugin
 
 on:
   pull_request:
@@ -70,10 +70,10 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version-file: '.node-version'
 
       - name: Install NPM Dependencies
-        run: npm install
+        run: npm ci --ignore-scripts
 
       - name: Lint JS
         run: npm run lint:js

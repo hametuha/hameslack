@@ -1,0 +1,92 @@
+name: Claude Code PR Review
+
+on:
+  workflow_run:
+    workflows: ["Test Plugin"]
+    types: [completed]
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+  id-token: write
+
+jobs:
+  # CI 全パス後の自動レビュー（同一リポジトリのPRのみ）
+  setup:
+    if: |
+      github.event_name == 'workflow_run' &&
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.head_repository.full_name == github.repository &&
+      github.event.workflow_run.actor.login != 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    outputs:
+      pr_number: ${{ steps.pr.outputs.number }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Get PR number
+        id: pr
+        run: |
+          PR_NUMBER=$(gh pr list --head "${{ github.event.workflow_run.head_branch }}" --json number --jq '.[0].number')
+          echo "number=$PR_NUMBER" >> $GITHUB_OUTPUT
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+  auto-review:
+    needs: setup
+    if: needs.setup.outputs.pr_number != ''
+    uses: tarosky/workflows/.github/workflows/claude-review.yml@main
+    with:
+      plugin_name: hameslack
+      ci_checks: "PHPUnit (PHP 7.4/8.3 x WP latest/6.6), PHPCS, PHPStan Level 5, PHP Lint, JS/CSS lint, asset build"
+      pr_number: ${{ fromJSON(needs.setup.outputs.pr_number) }}
+      head_sha: ${{ github.event.workflow_run.head_sha }}
+      custom_focus: |
+        - Slack からの受信（outgoing webhook / slash command）でハッシュキー・トークン検証が回避されないか、入力のサニタイズと出力のエスケープ
+        - Slack API・Webhook URL などの秘密情報の保存・表示・ログ出力の扱い（管理画面での露出、権限チェック、nonce）
+        - wp_remote_* による Slack API 呼び出しのエラー処理とタイムアウト、Gianism 連携（有無の両方）での動作
+    secrets:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+  # "@claude auto-review" で手動レビュー（メンバーのみ、PRコメントのみ）
+  manual-setup:
+    if: |
+      github.event_name == 'issue_comment' &&
+      contains(github.event.comment.body, '@claude auto-review') &&
+      github.event.issue.pull_request &&
+      contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.comment.author_association)
+    runs-on: ubuntu-latest
+    outputs:
+      pr_number: ${{ steps.pr.outputs.number }}
+      head_sha: ${{ steps.pr.outputs.head_sha }}
+    steps:
+      - name: Get PR info
+        id: pr
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          PR_NUMBER=${{ github.event.issue.number }}
+          HEAD_SHA=$(gh pr view "$PR_NUMBER" --repo "${{ github.repository }}" --json headRefOid --jq '.headRefOid')
+          echo "number=$PR_NUMBER" >> $GITHUB_OUTPUT
+          echo "head_sha=$HEAD_SHA" >> $GITHUB_OUTPUT
+
+  manual-review:
+    needs: manual-setup
+    if: needs.manual-setup.outputs.pr_number != ''
+    uses: tarosky/workflows/.github/workflows/claude-review.yml@main
+    with:
+      plugin_name: hameslack
+      ci_checks: "PHPUnit (PHP 7.4/8.3 x WP latest/6.6), PHPCS, PHPStan Level 5, PHP Lint, JS/CSS lint, asset build"
+      pr_number: ${{ fromJSON(needs.manual-setup.outputs.pr_number) }}
+      head_sha: ${{ needs.manual-setup.outputs.head_sha }}
+      is_manual: true
+      custom_focus: |
+        - Slack からの受信（outgoing webhook / slash command）でハッシュキー・トークン検証が回避されないか、入力のサニタイズと出力のエスケープ
+        - Slack API・Webhook URL などの秘密情報の保存・表示・ログ出力の扱い（管理画面での露出、権限チェック、nonce）
+        - wp_remote_* による Slack API 呼び出しのエラー処理とタイムアウト、Gianism 連携（有無の両方）での動作
+    secrets:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
