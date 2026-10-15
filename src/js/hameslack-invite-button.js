@@ -1,5 +1,7 @@
 /*!
  * Invitation button helper.
+ *
+ * @deps jquery
  */
 
 /* global jQuery, HameslackInvitation */
