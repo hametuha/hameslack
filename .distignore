@@ -1,24 +1,50 @@
-.browserslistrc
-.editorconfig
-.distignore
+# Files excluded from the WordPress.org / GitHub release package.
+# rsync --exclude-from format. Patterns starting with "/" are anchored to the repository root.
+#
+# Runtime files that MUST stay in the package:
+#   hameslack.php, app/ (PSR-0 autoload), functions/, hooks/, addons/, templates/,
+#   assets/ (built from src/), wp-dependencies.json, vendor/ + composer.json,
+#   LICENSE, readme.txt (generated on deploy)
+
+# VCS / CI
 .git
 .github
 .gitignore
+.distignore
+
+# Editor / AI agent settings
+.editorconfig
+.claude
+CLAUDE.md
+.DS_Store
+
+# WordPress.org assets (deployed to SVN /assets separately)
+.wordpress-org
+
+# Node / build tools (assets/ is generated from src/)
+.node-version
+.browserslistrc
 .husky
 .wp-env.json
-.wordpress-org
-node_modules
-composer.lock
 package.json
 package-lock.json
+node_modules
+/src
+
+# Composer (composer.json is kept because vendor/autoload.php is shipped)
+composer.lock
+
+# PHP lint / static analysis / tests
 phpcs.ruleset.xml
 phpstan.neon
 phpstan-baseline.neon
 phpstan-bootstrap.php
 phpunit.xml.dist
+/tests
+/bin
+
+# Documents (readme.txt is generated from README.md on deploy; addons/README.md is GitHub docs)
 README.md
-bin
-/src
-tests
+
+# Misc
 *.bak
-CLAUDE.md
