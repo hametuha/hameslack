@@ -2,7 +2,7 @@
 
 Tags: slack  
 Contributors: hametuha, Takahashi_Fumiki  
-Tested up to: 6.9  
+Tested up to: 7.1  
 Stable Tag: nightly  
 License: GPLv3 or later  
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
@@ -143,6 +143,13 @@ Please do not post it publicly. Report security bugs through the [Patchstack Vul
 3. You can create Outgoing Webhooks as custom post type.
 
 ## Changelog
+
+### 2.2.1
+
+- Fix 404 errors on all assets registered via `wp-dependencies.json` (CSS and JS URLs contained an extra `functions/` segment).
+- Slack login now goes through Gianism's `set_auth_cookie()`, so `gianism_before_set_login_cookie` and related hooks fire as with other services.
+- Translations are now delivered as language packs from [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/hameslack/). Bundled language files are removed.
+- Fix wrong text domains that prevented some strings from being translated.
 
 ### 2.2.0
 
