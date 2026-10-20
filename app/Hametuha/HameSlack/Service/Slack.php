@@ -207,7 +207,7 @@ class Slack extends AbstractService {
 						$this->hook_connect( $user_id, $user_info, true );
 						$this->welcome( $user_info->name );
 					}
-					wp_set_auth_cookie( $user_id, true );
+					$this->set_auth_cookie( $user_id );
 					$redirect_url = $this->filter_redirect( $redirect_url, 'login' );
 				} catch ( \Exception $e ) {
 					$this->auth_fail( $e->getMessage() );
