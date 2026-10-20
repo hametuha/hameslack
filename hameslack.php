@@ -11,7 +11,6 @@ Author URI: https://hametuha.co.jp
 License: GPL3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Text Domain: hameslack
-Domain Path: /languages
 */
 
 defined( 'ABSPATH' ) or die();
@@ -29,10 +28,7 @@ function hameslack_initialize() {
 	// Get version number
 	$info = get_file_data( __FILE__, array(
 		'version' => 'Version',
-		'domain'  => 'Text Domain',
 	) );
-
-	load_plugin_textdomain( $info['domain'], false, basename( __DIR__ ) . '/languages' );
 
 	define( 'HAMESLACK_VERSION', $info['version'] );
 	define( 'HAMESLACK_ROOT_DIR', __DIR__ );

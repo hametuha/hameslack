@@ -139,7 +139,7 @@ class HameSlackCommand extends WP_CLI_Command {
 			$table->addRow( $row );
 		}
 		$table->display();
-		WP_CLI::confirm( __( 'Are you sure to invite this user?', 'hametslack' ) );
+		WP_CLI::confirm( __( 'Are you sure to invite this user?', 'hameslack' ) );
 		$result = hameslack_user_invite( $user_id );
 		if ( is_wp_error( $result ) ) {
 			WP_CLI::error( $result->get_error_message() );
