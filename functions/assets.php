@@ -35,7 +35,7 @@ function hameslack_register_assets() {
 		if ( empty( $dep['path'] ) ) {
 			continue;
 		}
-		$url = plugin_dir_url( __DIR__ . '/assets' ) . $dep['path'];
+		$url = plugin_dir_url( __DIR__ ) . $dep['path'];
 		switch ( $dep['ext'] ) {
 			case 'css':
 				wp_register_style( $dep['handle'], $url, $dep['deps'], $dep['hash'], $dep['media'] );

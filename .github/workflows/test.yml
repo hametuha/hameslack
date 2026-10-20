@@ -15,6 +15,7 @@ jobs:
     with:
       php_version: ${{ matrix.php }}
       wp_version: ${{ matrix.wp }}
+      package: package
 
   phpcs:
     name: PHP Syntax Check
