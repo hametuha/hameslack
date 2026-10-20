@@ -130,6 +130,12 @@ This gives you a temporary public URL like `https://random-name.trycloudflare.co
 | `npm run fix` | Auto-fix lint errors |
 | `npm test` | Run PHPUnit tests |
 
+## Frequently Asked Questions
+
+### Where do I report security bugs found in this plugin?
+
+Please do not post it publicly. Report security bugs through the [Patchstack Vulnerability Disclosure Program](https://patchstack.com/database/report/wordpress/plugin/hameslack). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
+
 ## Screenshots
 
 1. You can create such kind of bot.
