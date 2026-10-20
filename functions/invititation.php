@@ -54,7 +54,7 @@ function hameslack_user_invite( $user_id ) {
 			throw new Exception( __( 'Specified user doesn\'t exist.', 'hameslack' ), 404 );
 		}
 		// translators: %d is ID, %s is user_login.
-		$title       = sprintf( __( 'New user #%1$d %2$s request invitation', 'hametuha' ), $user->ID, $user->user_login );
+		$title       = sprintf( __( 'New user #%1$d %2$s request invitation', 'hameslack' ), $user->ID, $user->user_login );
 		$attachments = [
 			[
 				'fallback'    => $title,

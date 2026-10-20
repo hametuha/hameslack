@@ -107,7 +107,7 @@ add_action( 'show_user_profile', function ( $user ) {
 	wp_localize_script( 'hameslack-invite-button', 'HameslackInvitation', [
 		'nonce'    => wp_create_nonce( 'wp_rest' ),
 		'endpoint' => rest_url( '/hameslack/v1/invitation/me' ),
-		'error'    => __( 'Failed to send request. Please try again later, or contact to admin.', 'hamail' ),
+		'error'    => __( 'Failed to send request. Please try again later, or contact to admin.', 'hameslack' ),
 	] );
 	?>
 	<h3 id="hamelack-invitaion"><?php esc_html_e( 'Request to Slack', 'hameslack' ); ?></h3>
