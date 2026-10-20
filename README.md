@@ -47,8 +47,8 @@ Everything works fine if you set properly.
 
 ### Deprecated API
 
-- **Sending Invitation** <code>deprecated at 2.0</code>:  this endpoint was unofficial and official one is only for Enterprise grid. Users now can send invitation reqeust from their profile page.
-- **Outgoind Webhook** <code>deprecated at 2.0</code>: Slack recommends Events API instead.
+- **Sending Invitation** <code>deprecated at 2.0</code>:  this endpoint was unofficial and official one is only for Enterprise grid. Users now can send invitation request from their profile page.
+- **Outgoing Webhook** <code>deprecated at 2.0</code>: Slack recommends Events API instead.
 
 ## Install
 
@@ -79,25 +79,18 @@ This plugin requires custom code to work with your Slack workspace. Here's how t
 
 ### Prerequisites
 
-- Node.js >= 22 (managed via [Volta](https://volta.sh/))
+- Node.js >= 22 (version is specified in `.node-version`)
 - Docker Desktop (for [wp-env](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/))
 - [cloudflared](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/get-started/) (for Slack Webhook testing)
 
 ### Getting Started
 
 <pre>
-# Install dependencies
-npm install
+npm install        # Install dependencies
 composer install
-
-# Start WordPress local environment
-npm start
-
-# Build assets
-npm run package
-
-# Watch for changes during development
-npm run watch
+npm start          # Start WordPress local environment
+npm run package    # Build assets
+npm run watch      # Watch for changes during development
 </pre>
 
 ### Receiving Slack Webhooks Locally
@@ -105,8 +98,7 @@ npm run watch
 Slack requires a public HTTPS URL for Event Subscriptions and Interactive Components. Use Cloudflare Tunnel to expose your local environment:
 
 <pre>
-# In a separate terminal, start the tunnel
-npm run tunnel
+npm run tunnel     # In a separate terminal, start the tunnel
 </pre>
 
 This gives you a temporary public URL like `https://random-name.trycloudflare.com`. Then:
