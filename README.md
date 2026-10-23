@@ -79,7 +79,7 @@ This plugin requires custom code to work with your Slack workspace. Here's how t
 
 ### Prerequisites
 
-- Node.js >= 22 (managed via [Volta](https://volta.sh/))
+- Node.js 22 (version pinned in `.node-version`; use a version manager such as mise, nodenv or fnm)
 - Docker Desktop (for [wp-env](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/))
 - [cloudflared](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/get-started/) (for Slack Webhook testing)
 
