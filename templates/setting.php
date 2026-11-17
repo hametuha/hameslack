@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) or die();
 				<label>
 					<?php
 					// translators: %s is service name.
-					printf( __( 'Connect with %s', 'wp-gianism' ), 'Slack' );
+					printf( __( 'Connect with %s', 'hameslack' ), 'Slack' );
 					?>
 				</label>
 			</th>
@@ -23,24 +23,24 @@ defined( 'ABSPATH' ) or die();
 					<?php
 					printf(
 						// translators: %1$s is service name, %2$s is link to create app.
-						__( 'You have to create %1$s App <a target="_blank" href="%2$s">here</a> to get required information.', 'wp-gianism' ),
+						__( 'You have to create %1$s App <a target="_blank" href="%2$s">here</a> to get required information.', 'hameslack' ),
 						'Slack',
 						'https://api.slack.com/apps'
 					);
 					// translators: %1$s is link to setup page, %2$s is link text.
-					printf( __( 'See detail at <a href="%1$s">%2$s</a>.', 'wp-gianism' ), $this->setting_url( 'setup' ), __( 'How to set up', 'wp-gianism' ) );
+					printf( __( 'See detail at <a href="%1$s">%2$s</a>.', 'hameslack' ), $this->setting_url( 'setup' ), __( 'How to set up', 'hameslack' ) );
 					?>
 				</p>
 			</td>
 		</tr>
 
 		<tr>
-			<th><label for="slack_client_id"><?php esc_html_e( 'Client ID', 'wp-gianism' ); ?></label></th>
+			<th><label for="slack_client_id"><?php esc_html_e( 'Client ID', 'hameslack' ); ?></label></th>
 			<td><input class="regular-text" type="text" name="slack_client_id" id="slack_client_id"
 					value="<?php echo esc_attr( $instance->slack_client_id ); ?>"/></td>
 		</tr>
 		<tr>
-			<th><label for="slack_client_secret"><?php esc_html_e( 'Client Secret', 'wp-gianism' ); ?></label></th>
+			<th><label for="slack_client_secret"><?php esc_html_e( 'Client Secret', 'hameslack' ); ?></label></th>
 			<td><input class="regular-text" type="text" name="slack_client_secret" id="slack_client_secret"
 					value="<?php echo esc_attr( $instance->slack_client_secret ); ?>"/></td>
 		</tr>
@@ -61,7 +61,7 @@ defined( 'ABSPATH' ) or die();
 			</td>
 		</tr>
 		<tr>
-			<th><label for="slack_redirect_uri"><?php esc_html_e( 'Redirect URI', 'wp-gianism' ); ?></label></th>
+			<th><label for="slack_redirect_uri"><?php esc_html_e( 'Redirect URI', 'hameslack' ); ?></label></th>
 			<td>
 				<p class="description">
 					<?php
@@ -76,7 +76,7 @@ defined( 'ABSPATH' ) or die();
 					);
 					?>
 					<a class="button" href="<?php echo esc_attr( $end_point ); ?>"
-						onclick="window.prompt('<?php esc_html_e( 'Please copy this URL.', 'wp-gianism' ); ?>', this.href); return false;"><?php esc_html_e( 'Copy', 'wp-gianism' ); ?></a>
+						onclick="window.prompt('<?php esc_html_e( 'Please copy this URL.', 'hameslack' ); ?>', this.href); return false;"><?php esc_html_e( 'Copy', 'hameslack' ); ?></a>
 				</p>
 			</td>
 		</tr>
