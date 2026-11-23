@@ -251,7 +251,7 @@ class Slack extends AbstractService {
 					'redirect_to' => $redirect_url,
 				] );
 				// translators: %1$s is URL, %2$s is service name.
-				$this->input->wp_die( sprintf( __( 'Sorry, but wrong access. Please go back to <a href="%1$s">%2$s</a>.', 'wp-gianism' ), home_url( '/' ), get_bloginfo( 'name' ) ), 500, false );
+				$this->input->wp_die( sprintf( __( 'Sorry, but wrong access. Please go back to <a href="%1$s">%2$s</a>.', 'hameslack' ), home_url( '/' ), get_bloginfo( 'name' ) ), 500, false );
 				break;
 		}
 	}
